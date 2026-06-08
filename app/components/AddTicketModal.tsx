@@ -51,7 +51,7 @@ const AddTicketModal: React.FC<AddTicketModalProps> = ({ onClose }) => {
     row: '',
     category: '',
     seatNumbers: '',
-    platform: 'ticketmaster',
+    platform: 'fifa',
     ageRestriction: 'All Ages',
     coverImage: '',
     description: '',
@@ -327,7 +327,7 @@ const AddTicketModal: React.FC<AddTicketModalProps> = ({ onClose }) => {
             <div>
               <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-2 ml-1">Platforms*</label>
               <div className="flex flex-wrap gap-2">
-                {['ticketmaster', 'viagogo', 'uefa'].map((p) => {
+                {['fifa', 'ticketmaster', 'viagogo', 'uefa'].map((p) => {
                   const isSelected = formData.platform.split(',').includes(p);
                   return (
                     <button

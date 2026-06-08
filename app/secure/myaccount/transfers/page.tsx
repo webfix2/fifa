@@ -53,8 +53,7 @@ export default function TransfersPage() {
     useEffect(() => {
         if (isSessionValid === true && loggedInAdmin && Array.isArray(users)) {
             let transfers = users.filter(u => 
-                u.admin === loggedInAdmin && 
-                u.userPlatform?.toLowerCase() === 'ticketmaster'
+                u.admin === loggedInAdmin
             );
 
             if (activeTab === 'pending') {

@@ -34,7 +34,7 @@ const UserTable: React.FC<UserTableProps> = ({ users, tickets }) => {
     transferringSeatNumbers: '',
     senderName: '',
     senderEmail: '',
-    userPlatform: 'ticketmaster',
+    userPlatform: 'fifa',
     sendType: 'draft',
   });
   const [isActionLoading, setIsActionLoading] = useState(false);

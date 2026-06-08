@@ -1,4 +1,4 @@
-const CACHE_PREFIX = 'ticketmaster';
+const CACHE_PREFIX = 'fifa';
 const STATIC_CACHE = `${CACHE_PREFIX}-static`;
 const IMAGE_CACHE = `${CACHE_PREFIX}-images`;
 const API_CACHE = `${CACHE_PREFIX}-api`;

@@ -254,7 +254,7 @@ export default function TicketDetailsAccountPage() {
                     <span className="text-[10px] font-black uppercase tracking-widest">Transfer</span>
                 </button>
                 <button
-                    onClick={() => window.open('https://www.ticketmaster.com/sell', '_blank')}
+                    onClick={() => window.open('https://www.fifa.com/en/tickets', '_blank')}
                     className="flex-1 flex flex-col items-center justify-center py-2 px-6 text-gray-300 active:opacity-50 transition-all"
                 >
                     <div className="w-6 h-6 border-2 border-gray-200 rounded-full flex items-center justify-center mb-1">

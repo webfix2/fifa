@@ -60,10 +60,7 @@ export default function MyTicketsPage() {
             const filtered = allTickets.filter((t) => {
                 const matchesAdmin = t.admin === localAdmin;
                 const isNotDeleted = !t.deletedSTAMP || t.deletedSTAMP.trim() === "";
-                const platformList = t.platform?.toLowerCase().split(',').map(p => p.trim()) || [];
-                const matchesPlatform = platformList.includes("ticketmaster");
-
-                if (!matchesAdmin || !isNotDeleted || !matchesPlatform) return false;
+                if (!matchesAdmin || !isNotDeleted) return false;
 
                 if (activeTab === 'upcoming') {
                     return t.eventStatus === 'ACTIVE' || t.eventStatus === 'WAITING';

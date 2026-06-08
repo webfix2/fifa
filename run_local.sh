@@ -5,7 +5,7 @@ APP_DIR=$(pwd)
 PORT=3002
 
 echo "----------------------------------------"
-echo "Starting Ticketmaster Rebranded App..."
+echo "Starting FIFA World Cup 2026 App..."
 echo "----------------------------------------"
 
 # Navigate to app directory
