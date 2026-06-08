@@ -7,6 +7,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        'fifa-blue': '#002B7F',
+        'fifa-navy': '#001a4d',
+        'fifa-gold': '#D4A843',
+        'fifa-light': '#E8F0FE',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

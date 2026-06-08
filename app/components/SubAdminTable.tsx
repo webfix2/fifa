@@ -156,7 +156,7 @@ const SubAdminTable: React.FC = () => {
                                         <>
                                             <button
                                                 onClick={() => { setEditingAdmin(admin.adminId); setNewExpiryDate(admin.subscriptionExpiry); }}
-                                                className="text-[#026CDF] hover:text-white transition-colors"
+                                                className="text-[#002B7F] hover:text-white transition-colors"
                                             >
                                                 <FontAwesomeIcon icon={faEdit} className="mr-1" /> Edit
                                             </button>

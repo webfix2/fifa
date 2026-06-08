@@ -69,10 +69,10 @@ const UpdateTicketModal: React.FC<UpdateTicketModalProps> = ({ ticket, onClose }
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4 overflow-y-auto font-sans">
       <div className="bg-white rounded-lg shadow-lg max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-6 pb-4 border-b border-gray-100">
-          <h2 className="text-2xl font-black text-[#001B41]">Update Ticket</h2>
+          <h2 className="text-2xl font-black text-[#002B7F]">Update Ticket</h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-[#001B41] transition-colors"
+            className="text-gray-400 hover:text-[#002B7F] transition-colors"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
           </button>
@@ -93,7 +93,7 @@ const UpdateTicketModal: React.FC<UpdateTicketModalProps> = ({ ticket, onClose }
                 name="eventName"
                 value={formData.eventName || ''}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
                 required
               />
             </div>
@@ -105,7 +105,7 @@ const UpdateTicketModal: React.FC<UpdateTicketModalProps> = ({ ticket, onClose }
                 name="venue"
                 value={formData.venue || ''}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
                 required
               />
             </div>
@@ -117,7 +117,7 @@ const UpdateTicketModal: React.FC<UpdateTicketModalProps> = ({ ticket, onClose }
                 name="location"
                 value={formData.location || ''}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
                 required
               />
             </div>
@@ -129,7 +129,7 @@ const UpdateTicketModal: React.FC<UpdateTicketModalProps> = ({ ticket, onClose }
                 name="dateTime"
                 value={formData.dateTime || ''}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
                 required
               />
             </div>
@@ -141,7 +141,7 @@ const UpdateTicketModal: React.FC<UpdateTicketModalProps> = ({ ticket, onClose }
                 name="doorTime"
                 value={formData.doorTime || ''}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
               />
             </div>
             
@@ -152,7 +152,7 @@ const UpdateTicketModal: React.FC<UpdateTicketModalProps> = ({ ticket, onClose }
                 name="section"
                 value={formData.section || ''}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
                 required
               />
             </div>
@@ -164,7 +164,7 @@ const UpdateTicketModal: React.FC<UpdateTicketModalProps> = ({ ticket, onClose }
                 name="sectionNo"
                 value={formData.sectionNo || ''}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
               />
             </div>
             
@@ -175,7 +175,7 @@ const UpdateTicketModal: React.FC<UpdateTicketModalProps> = ({ ticket, onClose }
                 name="row"
                 value={formData.row || ''}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
                 required
               />
             </div>
@@ -186,7 +186,7 @@ const UpdateTicketModal: React.FC<UpdateTicketModalProps> = ({ ticket, onClose }
                 name="ageRestriction"
                 value={formData.ageRestriction || 'All Ages'}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
               >
                 <option value="All Ages">All Ages</option>
                 <option value="18+">18+</option>
@@ -202,7 +202,7 @@ const UpdateTicketModal: React.FC<UpdateTicketModalProps> = ({ ticket, onClose }
               name="coverImage"
               value={formData.coverImage || ''}
               onChange={handleChange}
-              className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+              className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
             />
           </div>
           
@@ -213,7 +213,7 @@ const UpdateTicketModal: React.FC<UpdateTicketModalProps> = ({ ticket, onClose }
               value={formData.description || ''}
               onChange={handleChange}
               rows={3}
-              className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+              className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
             ></textarea>
           </div>
           
@@ -224,7 +224,7 @@ const UpdateTicketModal: React.FC<UpdateTicketModalProps> = ({ ticket, onClose }
               value={formData.terms || ''}
               onChange={handleChange}
               rows={2}
-              className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+              className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
             ></textarea>
           </div>
           
@@ -239,7 +239,7 @@ const UpdateTicketModal: React.FC<UpdateTicketModalProps> = ({ ticket, onClose }
             </button>
             <button
               type="submit"
-              className="px-8 py-3 bg-[#026CDF] text-white rounded-xl font-black shadow-lg shadow-[#026CDF]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center"
+              className="px-8 py-3 bg-[#002B7F] text-white rounded-xl font-black shadow-lg shadow-[#002B7F]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center"
               disabled={loading}
             >
               {loading ? (

@@ -6,15 +6,15 @@ export async function GET(request: NextRequest) {
   const startUrl = token ? `/login?token=${encodeURIComponent(token)}` : '/login';
 
   const manifest = {
-    name: 'Ticketmaster',
-    short_name: 'Ticketmaster',
-    description: 'Buy and sell concert, sports and theatre tickets',
+    name: 'FIFA World Cup 2026™ Official Tickets',
+    short_name: 'FIFA Tickets',
+    description: 'Send, receive, and manage your FIFA World Cup 2026™ match tickets',
     start_url: startUrl,
     scope: '/',
     display: 'standalone',
     orientation: 'portrait-primary',
-    background_color: '#026CDF',
-    theme_color: '#026CDF',
+    background_color: '#002B7F',
+    theme_color: '#002B7F',
     icons: [
       { src: '/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
       { src: '/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },

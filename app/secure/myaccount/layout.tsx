@@ -126,19 +126,19 @@ export default function MyAccountLayout({
             {/* Global Bottom Nav */}
             {!isDetailView && (
             <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-6 pt-3 pb-6 flex justify-between items-center z-[100] shadow-[0_-8px_30px_rgb(0,0,0,0.04)]">
-                <button onClick={() => router.push('/')} className={`flex flex-col items-center space-y-1 ${pathname === '/' ? 'text-[#026CDF]' : 'text-gray-400'}`}>
+                <button onClick={() => router.push('/')} className={`flex flex-col items-center space-y-1 ${pathname === '/' ? 'text-[#002B7F]' : 'text-gray-400'}`}>
                     <FontAwesomeIcon icon={faSearch} className="text-xl" />
                     <span className="text-[10px] font-bold">Discover</span>
                 </button>
-                <button onClick={() => router.push('/secure/myaccount/transfers')} className={`flex flex-col items-center space-y-1 ${pathname.includes('/transfers') ? 'text-[#026CDF]' : 'text-gray-400'}`}>
+                <button onClick={() => router.push('/secure/myaccount/transfers')} className={`flex flex-col items-center space-y-1 ${pathname.includes('/transfers') ? 'text-[#002B7F]' : 'text-gray-400'}`}>
                     <FontAwesomeIcon icon={faHeart} className="text-xl" />
                     <span className="text-[10px] font-bold">Favorites</span>
                 </button>
-                <button onClick={() => router.push('/secure/myaccount/tickets')} className={`flex flex-col items-center space-y-1 ${pathname.includes('/tickets') ? 'text-[#026CDF]' : 'text-gray-400'}`}>
+                <button onClick={() => router.push('/secure/myaccount/tickets')} className={`flex flex-col items-center space-y-1 ${pathname.includes('/tickets') ? 'text-[#002B7F]' : 'text-gray-400'}`}>
                     <FontAwesomeIcon icon={faTicketAlt} className="text-xl" />
                     <span className="text-[10px] font-bold">My Tickets</span>
                 </button>
-                <button onClick={() => router.push('/secure/myaccount/manage')} className={`flex flex-col items-center space-y-1 ${pathname.includes('/manage') || pathname.includes('/personal-details') ? 'text-[#026CDF]' : 'text-gray-400'}`}>
+                <button onClick={() => router.push('/secure/myaccount/manage')} className={`flex flex-col items-center space-y-1 ${pathname.includes('/manage') || pathname.includes('/personal-details') ? 'text-[#002B7F]' : 'text-gray-400'}`}>
                     <FontAwesomeIcon icon={faUserCircle} className="text-xl" />
                     <span className="text-[10px] font-bold">My Account</span>
                 </button>

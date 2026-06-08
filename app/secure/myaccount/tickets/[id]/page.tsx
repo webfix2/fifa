@@ -133,7 +133,7 @@ export default function TicketDetailsAccountPage() {
 
                 {/* View Tickets button */}
                 <div className="px-4 py-4 bg-white">
-                    <button className="w-full bg-[#026CDF] text-white py-3.5 rounded-md font-black text-sm uppercase tracking-widest flex items-center justify-center space-x-4 shadow-xl active:scale-[0.98] transition-all">
+                    <button className="w-full bg-[#002B7F] text-white py-3.5 rounded-md font-black text-sm uppercase tracking-widest flex items-center justify-center space-x-4 shadow-xl active:scale-[0.98] transition-all">
                         <FontAwesomeIcon icon={faBarcode} className="text-lg" />
                         <span>View Tickets</span>
                     </button>
@@ -146,13 +146,13 @@ export default function TicketDetailsAccountPage() {
                 <div className="flex border-b border-gray-100 -mx-4 px-4">
                     <button
                         onClick={() => setActiveTab('tickets')}
-                        className={`flex-1 py-4 font-black text-[12px] uppercase tracking-widest border-b-[3px] transition-all ${activeTab === 'tickets' ? 'border-[#026CDF] text-[#001B41]' : 'border-transparent text-gray-400'}`}
+                        className={`flex-1 py-4 font-black text-[12px] uppercase tracking-widest border-b-[3px] transition-all ${activeTab === 'tickets' ? 'border-[#002B7F] text-[#002B7F]' : 'border-transparent text-gray-400'}`}
                     >
                         Tickets
                     </button>
                     <button
                         onClick={() => setActiveTab('extras')}
-                        className={`flex-1 py-4 font-black text-[12px] uppercase tracking-widest border-b-[3px] transition-all ${activeTab === 'extras' ? 'border-[#026CDF] text-[#001B41]' : 'border-transparent text-gray-400'}`}
+                        className={`flex-1 py-4 font-black text-[12px] uppercase tracking-widest border-b-[3px] transition-all ${activeTab === 'extras' ? 'border-[#002B7F] text-[#002B7F]' : 'border-transparent text-gray-400'}`}
                     >
                         Extras
                     </button>
@@ -163,7 +163,7 @@ export default function TicketDetailsAccountPage() {
                     <div className="mt-6 space-y-8 animate-in fade-in duration-500 pb-[120px]">
                         <div className="flex justify-between items-center">
                             <div>
-                                <h3 className="text-lg font-black text-[#001B41]">Order #{ticket.ticketId.toUpperCase()}</h3>
+                                <h3 className="text-lg font-black text-[#002B7F]">Order #{ticket.ticketId.toUpperCase()}</h3>
                                 <p className="text-xs font-bold text-gray-400 mt-1">{seats.length} Tickets</p>
                             </div>
                             <button className="w-10 h-10 flex items-center justify-center text-gray-300">
@@ -175,22 +175,22 @@ export default function TicketDetailsAccountPage() {
                             {seats.map((seatNum, idx) => (
                                 <div key={idx} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                                     <div className="bg-[#F0F2F5] px-6 py-3">
-                                        <p className="text-[10px] font-black text-[#001B41]/40 uppercase tracking-widest">
+                                        <p className="text-[10px] font-black text-[#002B7F]/40 uppercase tracking-widest">
                                             ENGENE Member Presale
                                         </p>
                                     </div>
                                     <div className="p-6 grid grid-cols-3 gap-4">
                                         <div>
                                             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Section</p>
-                                            <p className="text-base font-black text-[#001B41] uppercase">{ticket.section}</p>
+                                            <p className="text-base font-black text-[#002B7F] uppercase">{ticket.section}</p>
                                         </div>
                                         <div>
                                             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Row</p>
-                                            <p className="text-base font-black text-[#001B41] uppercase">{ticket.row}</p>
+                                            <p className="text-base font-black text-[#002B7F] uppercase">{ticket.row}</p>
                                         </div>
                                         <div>
                                             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Seat</p>
-                                            <p className="text-base font-black text-[#001B41] uppercase">{seatNum}</p>
+                                            <p className="text-base font-black text-[#002B7F] uppercase">{seatNum}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -199,7 +199,7 @@ export default function TicketDetailsAccountPage() {
 
                         {/* More Options / Map Section */}
                         <div className="pt-12 space-y-8">
-                            <h4 className="text-lg font-black text-[#001B41] uppercase tracking-tight">More Options</h4>
+                            <h4 className="text-lg font-black text-[#002B7F] uppercase tracking-tight">More Options</h4>
 
                             {/* Venue Map Card */}
                             <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
@@ -218,7 +218,7 @@ export default function TicketDetailsAccountPage() {
                                     href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(ticket.venue + ' ' + ticket.location)}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="block w-full bg-[#F0F2F5] py-4 text-sm font-black text-[#001B41] uppercase tracking-widest hover:bg-gray-200 transition-colors text-center"
+                                    className="block w-full bg-[#F0F2F5] py-4 text-sm font-black text-[#002B7F] uppercase tracking-widest hover:bg-gray-200 transition-colors text-center"
                                 >
                                     Get Directions
                                 </a>
@@ -230,12 +230,12 @@ export default function TicketDetailsAccountPage() {
                                     <img src={ticket.coverImage} alt="Event" className="w-full h-full object-cover opacity-80" />
                                     <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent flex items-center px-8">
                                         <div className="max-w-[180px]">
-                                            <h5 className="text-2xl font-black text-[#001B41] leading-tight">YOU GOT TICKETS!</h5>
+                                            <h5 className="text-2xl font-black text-[#002B7F] leading-tight">YOU GOT TICKETS!</h5>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="p-6">
-                                    <h6 className="text-lg font-black text-[#001B41]">Post on Social Media</h6>
+                                    <h6 className="text-lg font-black text-[#002B7F]">Post on Social Media</h6>
                                     <p className="text-sm font-bold text-gray-400 mt-2">Build hype for the event, and share that you got tickets with your friends and family</p>
                                 </div>
                             </div>
@@ -248,7 +248,7 @@ export default function TicketDetailsAccountPage() {
             <div className="fixed bottom-[40px] left-1/2 -translate-x-1/2 flex items-center bg-white shadow-[0_12px_40px_rgba(0,0,0,0.25)] rounded-full border border-gray-100 p-1.5 z-[110] min-w-[280px]" style={{ marginBottom: 'env(safe-area-inset-bottom, 0px)' }}>
                 <button
                     onClick={() => setIsTransferModalOpen(true)}
-                    className="flex-1 flex flex-col items-center justify-center py-2 px-6 text-[#026CDF] active:opacity-50 transition-all border-r border-gray-100"
+                    className="flex-1 flex flex-col items-center justify-center py-2 px-6 text-[#002B7F] active:opacity-50 transition-all border-r border-gray-100"
                 >
                     <FontAwesomeIcon icon={faShareAlt} className="text-xl mb-1 rotate-[-45deg]" />
                     <span className="text-[10px] font-black uppercase tracking-widest">Transfer</span>

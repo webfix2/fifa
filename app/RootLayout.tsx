@@ -11,6 +11,8 @@ import Image from 'next/image';
 
 library.add(faPhone, faLock, faTicketAlt, faUser, faSearch);
 
+const FAVICON = 'https://play-lh.googleusercontent.com/nQLbIovsHYyx1EhAHYc2gdNO9MIIdDLkWWXHuKnLoSVcaOCRtsHPdiYcVQ3tieTe8F3EkKGZVHdcQRO3rU48=w240-h480-rw';
+
 export default function RootLayoutWrapper({
   children,
   inter,
@@ -30,9 +32,9 @@ export default function RootLayoutWrapper({
     router.push('/');
   };
 
-  const openTicketmasterLink = (path: string) => {
-    const ticketmasterBase = 'https://www.ticketmaster.com';
-    const fullUrl = `${ticketmasterBase}${path}`;
+  const openFifaLink = (path: string) => {
+    const baseUrl = 'https://www.fifa.com';
+    const fullUrl = `${baseUrl}${path}`;
     window.open(fullUrl, '_self');
   };
 
@@ -40,7 +42,7 @@ export default function RootLayoutWrapper({
     e.preventDefault();
     const query = searchQuery.trim();
     if (query !== '') {
-      const searchUrl = `https://www.ticketmaster.com/search?q=${encodeURIComponent(query)}`;
+      const searchUrl = `https://www.fifa.com/en/search?q=${encodeURIComponent(query)}`;
       window.open(searchUrl, '_self');
     }
   };
@@ -57,35 +59,31 @@ export default function RootLayoutWrapper({
     <div className={`${inter.className} bg-[#f5f5f5] min-h-screen flex flex-col`}>
       {shouldShowHeaderFooter && (
         <>
-          {/* Ticketmaster-styled header */}
-          <header className="fixed top-0 left-0 right-0 z-10 bg-[#026CDF] shadow-md">
-            {/* Top navigation bar */}
-            <div className="bg-[#001B41] text-white py-1 px-4">
+          <header className="fixed top-0 left-0 right-0 z-10 bg-[#002B7F] shadow-md">
+            <div className="bg-[#001a4d] text-white py-1 px-4">
               <div className="container mx-auto flex justify-end items-center text-xs">
                 <button
-                  onClick={() => openTicketmasterLink('/help')}
+                  onClick={() => openFifaLink('/en/help')}
                   className="mr-4 hover:underline"
                 >
                   Help
                 </button>
 
                 <button
-                  onClick={() => openTicketmasterLink('/member')}
+                  onClick={() => openFifaLink('/en/login')}
                   className="flex items-center hover:underline"
                 >
                   <FontAwesomeIcon icon={faUser} className="mr-1" />
-                  My Account
+                  My FIFA Account
                 </button>
               </div>
             </div>
 
-            {/* Main header */}
             <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-              {/* Logo */}
               <Link href="/" className="flex items-center">
                 <Image
-                  src="https://lh3.googleusercontent.com/a-/ALV-UjXmI_R6mr2s1KnPXx7t5KhgAe9drmgY8So16bDQ9clqysQp-jQ=s300-p-k-rw-no"
-                  alt="Ticketmaster"
+                  src={FAVICON}
+                  alt="FIFA World Cup 2026"
                   width={40}
                   height={40}
                   className="sm:hidden rounded-full"
@@ -93,52 +91,50 @@ export default function RootLayoutWrapper({
                 />
                 <div className="text-white font-black text-2xl hidden sm:flex items-center">
                   <Image
-                    src="https://lh3.googleusercontent.com/a-/ALV-UjXmI_R6mr2s1KnPXx7t5KhgAe9drmgY8So16bDQ9clqysQp-jQ=s300-p-k-rw-no"
-                    alt="Ticketmaster"
+                    src={FAVICON}
+                    alt="FIFA World Cup 2026"
                     width={32}
                     height={32}
                     className="mr-2 rounded-full"
                     unoptimized={true}
                   />
-                  <span>ticketmaster</span>
+                  <span>FIFA World Cup 2026™</span>
                 </div>
               </Link>
 
-              {/* Navigation */}
               <div className="hidden lg:flex items-center space-x-6 text-white">
                 <button
-                  onClick={() => openTicketmasterLink('/concerts')}
-                  className="hover:text-[#F5A623] font-medium"
+                  onClick={() => openFifaLink('/en/tournaments/worldcup')}
+                  className="hover:text-[#D4A843] font-medium"
                 >
-                  Concerts
+                  World Cup
                 </button>
                 <button
-                  onClick={() => openTicketmasterLink('/sports')}
-                  className="hover:text-[#F5A623] font-medium"
+                  onClick={() => openFifaLink('/en/tickets')}
+                  className="hover:text-[#D4A843] font-medium"
                 >
-                  Sports
+                  Tickets
                 </button>
                 <button
-                  onClick={() => openTicketmasterLink('/arts')}
-                  className="hover:text-[#F5A623] font-medium"
+                  onClick={() => openFifaLink('/en/transfers')}
+                  className="hover:text-[#D4A843] font-medium"
                 >
-                  Arts & Theater
+                  Transfers
                 </button>
                 <button
-                  onClick={() => openTicketmasterLink('/family')}
-                  className="hover:text-[#F5A623] font-medium"
+                  onClick={() => openFifaLink('/en/teams')}
+                  className="hover:text-[#D4A843] font-medium"
                 >
-                  Family
+                  Teams
                 </button>
                 <button
-                  onClick={() => openTicketmasterLink('/more')}
-                  className="hover:text-[#F5A623] font-medium"
+                  onClick={() => openFifaLink('/en/stadiums')}
+                  className="hover:text-[#D4A843] font-medium"
                 >
-                  More
+                  Stadiums
                 </button>
               </div>
 
-              {/* Mobile menu */}
               <div className="lg:hidden flex items-center">
                 <button className="text-white p-2">
                   <svg
@@ -159,17 +155,16 @@ export default function RootLayoutWrapper({
               </div>
             </div>
 
-            {/* Search bar */}
             <div className="bg-white py-3 px-4 shadow-sm">
               <div className="container mx-auto">
                 <form onSubmit={handleSearchSubmit}>
                   <div className="relative">
                     <input
                       type="text"
-                      placeholder="Search for artists, venues, or events"
+                      placeholder="Search for matches, teams, or stadiums"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full py-2 pl-10 pr-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#026CDF]"
+                      className="w-full py-2 pl-10 pr-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#002B7F]"
                     />
                     <button type="submit">
                       <FontAwesomeIcon
@@ -185,44 +180,43 @@ export default function RootLayoutWrapper({
         </>
       )}
 
-      {/* Main Content */}
       <main className={`flex-grow ${shouldShowHeaderFooter ? "pt-36 z-0" : ""}`}>{children}</main>
 
       {shouldShowHeaderFooter && (
-        <footer className="bg-[#001B41] text-white py-12 mt-16">
+        <footer className="bg-[#002B7F] text-white py-12 mt-16">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div>
-                <h3 className="text-lg font-bold mb-4">Help & Support</h3>
+                <h3 className="text-lg font-bold mb-4">FIFA World Cup 2026™</h3>
                 <ul className="space-y-2">
                   <li>
                     <button
-                      onClick={() => openTicketmasterLink('/help')}
-                      className="hover:text-[#F5A623]"
+                      onClick={() => openFifaLink('/en/tournaments/worldcup')}
+                      className="hover:text-[#D4A843]"
                     >
-                      Help Center
+                      Tournament
                     </button>
                   </li>
                   <li>
                     <button
-                      onClick={() => openTicketmasterLink('/faq')}
-                      className="hover:text-[#F5A623]"
+                      onClick={() => openFifaLink('/en/tickets/faq')}
+                      className="hover:text-[#D4A843]"
                     >
-                      FAQs
+                      Ticket FAQs
                     </button>
                   </li>
                   <li>
                     <button
-                      onClick={() => openTicketmasterLink('/contact')}
-                      className="hover:text-[#F5A623]"
+                      onClick={() => openFifaLink('/en/contact')}
+                      className="hover:text-[#D4A843]"
                     >
                       Contact Us
                     </button>
                   </li>
                   <li>
                     <button
-                      onClick={() => openTicketmasterLink('/accessibility')}
-                      className="hover:text-[#F5A623]"
+                      onClick={() => openFifaLink('/en/accessibility')}
+                      className="hover:text-[#D4A843]"
                     >
                       Accessibility
                     </button>
@@ -230,22 +224,21 @@ export default function RootLayoutWrapper({
                 </ul>
               </div>
 
-              {/* My Account (Static) */}
               <div>
-                <h3 className="text-lg font-bold mb-4">My Account</h3>
+                <h3 className="text-lg font-bold mb-4">My Tickets</h3>
                 <ul className="space-y-2">
                   <li>
-                    <Link href="/account" className="hover:text-[#F5A623]">
+                    <Link href="/secure/myaccount/tickets" className="hover:text-[#D4A843]">
                       My Tickets
                     </Link>
                   </li>
                   <li>
-                    <Link href="/account/favorites" className="hover:text-[#F5A623]">
-                      Favorites
+                    <Link href="/secure/myaccount/transfers" className="hover:text-[#D4A843]">
+                      Transfers
                     </Link>
                   </li>
                   <li>
-                    <Link href="/account/settings" className="hover:text-[#F5A623]">
+                    <Link href="/secure/myaccount/manage" className="hover:text-[#D4A843]">
                       Account Settings
                     </Link>
                   </li>
@@ -253,68 +246,50 @@ export default function RootLayoutWrapper({
               </div>
 
               <div>
-                <h3 className="text-lg font-bold mb-4">Discover</h3>
+                <h3 className="text-lg font-bold mb-4">More FIFA</h3>
                 <ul className="space-y-2">
                   <li>
                     <button
-                      onClick={() => openTicketmasterLink('/gift-cards')}
-                      className="hover:text-[#F5A623]"
+                      onClick={() => openFifaLink('/en/development')}
+                      className="hover:text-[#D4A843]"
                     >
-                      Gift Cards
+                      Football Development
                     </button>
                   </li>
                   <li>
                     <button
-                      onClick={() => openTicketmasterLink('/vip')}
-                      className="hover:text-[#F5A623]"
+                      onClick={() => openFifaLink('/en/fifaplus')}
+                      className="hover:text-[#D4A843]"
                     >
-                      VIP Access
+                      FIFA+
                     </button>
                   </li>
                   <li>
                     <button
-                      onClick={() => openTicketmasterLink('/deals')}
-                      className="hover:text-[#F5A623]"
+                      onClick={() => openFifaLink('/en/legal')}
+                      className="hover:text-[#D4A843]"
                     >
-                      Deals & Promotions
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      onClick={() => openTicketmasterLink('/groups')}
-                      className="hover:text-[#F5A623]"
-                    >
-                      Groups & Packages
+                      Legal & Privacy
                     </button>
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h3 className="text-lg font-bold mb-4">Follow Us</h3>
-                <div className="flex space-x-4 mb-6">
-                  {/* Social Icons */}
-                  {/* Add your social links here */}
+                <h3 className="text-lg font-bold mb-4">Get the App</h3>
+                <div className="flex space-x-2">
+                  <a href="https://play.google.com/store/apps/details?id=io.tixngo.app.fifatickets" className="block">
+                    <img
+                      src="https://placehold.co/120x40/001a4d/FFFFFF?text=Google+Play"
+                      alt="Google Play"
+                      className="h-10"
+                    />
+                  </a>
                 </div>
-                <div>
-                  <h4 className="text-sm font-semibold mb-2">Get the Ticketmaster App</h4>
-                  <div className="flex space-x-2">
-                    <a href="#" className="block">
-                      <img
-                        src="https://placehold.co/120x40/001B41/FFFFFF?text=App+Store"
-                        alt="App Store"
-                        className="h-10"
-                      />
-                    </a>
-                    <a href="#" className="block">
-                      <img
-                        src="https://placehold.co/120x40/001B41/FFFFFF?text=Google+Play"
-                        alt="Google Play"
-                        className="h-10"
-                      />
-                    </a>
-                  </div>
-                </div>
+                <p className="text-xs mt-4 opacity-70">
+                  FIFA-Strasse 20<br />
+                  8044 Zürich, Switzerland
+                </p>
               </div>
             </div>
           </div>

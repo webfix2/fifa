@@ -17,11 +17,11 @@
 }
 
 html {
-  background: #1F1F1F;
+  background: #002B7F;
 }
 body {
   color: rgb(var(--foreground-rgb));
-  background: #1F1F1F;
+  background: #002B7F;
   overflow-x: hidden;
   overscroll-behavior: none;
 }

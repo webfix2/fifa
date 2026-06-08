@@ -97,7 +97,7 @@ const TicketTable: React.FC<TicketTableProps> = ({ tickets, users, onTicketsChan
             </div>
             <button
               onClick={() => setShowAddModal(true)}
-              className="bg-[#026CDF] hover:bg-[#026CDF]/90 text-white px-4 py-2 rounded-md flex items-center w-full sm:w-auto justify-center font-bold"
+              className="bg-[#002B7F] hover:bg-[#002B7F]/90 text-white px-4 py-2 rounded-md flex items-center w-full sm:w-auto justify-center font-bold"
             >
               <FontAwesomeIcon icon={faPlus} className="mr-2" />
               Add Ticket
@@ -131,7 +131,7 @@ const TicketTable: React.FC<TicketTableProps> = ({ tickets, users, onTicketsChan
                     <div className="flex items-center justify-center space-x-3">
                       <button
                         onClick={() => handleUpdateTicket(ticket)}
-                        className="text-[#026CDF] hover:opacity-70"
+                        className="text-[#002B7F] hover:opacity-70"
                         title="Update Ticket"
                         disabled={isDeleting === ticket.ticketId}
                       >

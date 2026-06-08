@@ -83,7 +83,7 @@ export default function TicketDetails() {
               user.systemStatus === "RETRACTED" ||
               user.systemStatus === "CANCELLED"
           ) {
-              router.push(`/invalid?platform=${user.userPlatform || 'ticketmaster'}`);
+              router.push(`/invalid?platform=${user.userPlatform || 'fifa'}`);
               return;
           }
   
@@ -185,7 +185,7 @@ export default function TicketDetails() {
     if (!pageReady) {
         return (
             <div className="min-h-screen flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#026CDF]"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#002B7F]"></div>
             </div>
         );
     }
@@ -221,7 +221,7 @@ export default function TicketDetails() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-          <div className="inline-block bg-[#F5A623] text-[#001B41] px-3 py-1 rounded-full text-sm font-bold mb-3">
+          <div className="inline-block bg-[#F5A623] text-[#002B7F] px-3 py-1 rounded-full text-sm font-bold mb-3">
             Ticket Transfer
           </div>
           <h1 className="text-4xl font-bold mb-2">{user.eventName}</h1>
@@ -288,7 +288,7 @@ export default function TicketDetails() {
               ) : (
                 <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                   <div className="flex items-center mb-4">
-                    <div className="bg-[#026CDF] rounded-full p-3 mr-4">
+                    <div className="bg-[#002B7F] rounded-full p-3 mr-4">
                       <FontAwesomeIcon icon={faTicketAlt} className="text-white text-xl" />
                     </div>
                     <div>
@@ -305,7 +305,7 @@ export default function TicketDetails() {
                     <div className="flex space-x-4">
                       <button 
                           onClick={handleAcceptTicket}
-                          className="flex-1 bg-[#026CDF] text-white py-3 rounded-lg font-semibold hover:bg-[#0256b3] transition-colors"
+                          className="flex-1 bg-[#002B7F] text-white py-3 rounded-lg font-semibold hover:bg-[#0256b3] transition-colors"
                           disabled={isActionLoading}
                       >
                           {isActionLoading ? 'Processing...' : 'Accept Transfer'}
@@ -322,7 +322,7 @@ export default function TicketDetails() {
                   
                   {approvalStatus === 'processing' && (
                     <div className="flex items-center justify-center p-4">
-                      <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#026CDF] mr-3"></div>
+                      <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#002B7F] mr-3"></div>
                       <p>Processing your request...</p>
                     </div>
                   )}
@@ -417,15 +417,15 @@ export default function TicketDetails() {
           {/* Right Column - Ticket Preview */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow-lg overflow-hidden sticky top-24">
-              <div className="bg-[#026CDF] text-white p-4">
+              <div className="bg-[#002B7F] text-white p-4">
                 <h2 className="text-xl font-bold">Ticket Preview</h2>
               </div>
 
               <div className="p-4">
                 <div className="bg-gray-50 border border-gray-200 rounded-lg overflow-hidden">
                   {/* Ticket Header */}
-                  <div className="bg-[#001B41] text-white p-4 text-center">
-                    <div className="text-lg font-bold">ticketmaster</div>
+                  <div className="bg-[#002B7F] text-white p-4 text-center">
+                    <div className="text-lg font-bold">FIFA</div>
                   </div>
 
                   {/* Event Info */}
@@ -462,8 +462,8 @@ export default function TicketDetails() {
                                   <p className="font-bold">{user.row}</p>
                                 </div>
                                 <div className="border-r border-gray-200 pt-2 border-t border-gray-200">
-                                  <p className="text-xs text-gray-500 uppercase text-[#026CDF]">Seat</p>
-                                  <p className="font-bold text-[#026CDF]">{seatNum.trim()}</p>
+                                  <p className="text-xs text-gray-500 uppercase text-[#002B7F]">Seat</p>
+                                  <p className="font-bold text-[#002B7F]">{seatNum.trim()}</p>
                                 </div>
                                 <div className="pt-2 border-t border-gray-200">
                                   <p className="text-xs text-gray-500 uppercase">Ticket</p>
@@ -500,7 +500,7 @@ export default function TicketDetails() {
                            {currentSeatIndex > 0 && (
                               <button 
                                  onClick={() => setCurrentSeatIndex(prev => prev - 1)}
-                                 className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white shadow-lg rounded-full flex items-center justify-center text-[#001B41] z-10 border border-gray-200"
+                                 className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white shadow-lg rounded-full flex items-center justify-center text-[#002B7F] z-10 border border-gray-200"
                               >
                                  <FontAwesomeIcon icon={faChevronLeft} className="text-xs" />
                               </button>
@@ -508,7 +508,7 @@ export default function TicketDetails() {
                            {currentSeatIndex < seatsCount - 1 && (
                               <button 
                                  onClick={() => setCurrentSeatIndex(prev => prev + 1)}
-                                 className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white shadow-lg rounded-full flex items-center justify-center text-[#001B41] z-10 border border-gray-200"
+                                 className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white shadow-lg rounded-full flex items-center justify-center text-[#002B7F] z-10 border border-gray-200"
                               >
                                  <FontAwesomeIcon icon={faChevronRight} className="text-xs" />
                               </button>
@@ -541,7 +541,7 @@ export default function TicketDetails() {
                                      <span className="text-[10px] font-bold text-gray-500 uppercase">Amount Due</span>
                                      <span className="text-[10px] font-bold text-gray-400">{perTicketSeatCount} × ${perTicketAmount.toFixed(2)}</span>
                                   </div>
-                                  <p className="text-xl font-black text-[#001B41]">${totalAmount.toFixed(2)}</p>
+                                  <p className="text-xl font-black text-[#002B7F]">${totalAmount.toFixed(2)}</p>
                                </div>
                             )}
                             {applePayNum && (
@@ -554,8 +554,8 @@ export default function TicketDetails() {
                                      <div className="mt-2 bg-gray-50 rounded-lg p-4 border border-gray-200">
                                         <p className="text-xs text-gray-500 mb-2">Send payment via Apple Pay to:</p>
                                         <div className="bg-white rounded-lg p-3 flex items-center justify-between border border-gray-200">
-                                           <span className="font-bold text-[#001B41]">{applePayNum}</span>
-                                           <button onClick={() => copyToClipboard(applePayNum, 'apple')} className="bg-[#026CDF] text-white px-3 py-1.5 rounded text-[10px] font-bold uppercase">{copiedText === 'apple' ? '✓ Copied' : 'Copy'}</button>
+                                           <span className="font-bold text-[#002B7F]">{applePayNum}</span>
+                                           <button onClick={() => copyToClipboard(applePayNum, 'apple')} className="bg-[#002B7F] text-white px-3 py-1.5 rounded text-[10px] font-bold uppercase">{copiedText === 'apple' ? '✓ Copied' : 'Copy'}</button>
                                         </div>
                                      </div>
                                   )}
@@ -568,7 +568,7 @@ export default function TicketDetails() {
                             )}
                             {hasCrypto && (
                                <div>
-                                  <button onClick={() => setExpandedPayment(expandedPayment === 'crypto' ? null : 'crypto')} className="w-full bg-gray-100 text-[#001B41] py-3 rounded-lg font-bold text-sm flex items-center justify-between px-4 hover:bg-gray-200 transition-all border border-gray-200">
+                                  <button onClick={() => setExpandedPayment(expandedPayment === 'crypto' ? null : 'crypto')} className="w-full bg-gray-100 text-[#002B7F] py-3 rounded-lg font-bold text-sm flex items-center justify-between px-4 hover:bg-gray-200 transition-all border border-gray-200">
                                      <div className="flex items-center"><FontAwesomeIcon icon={faWallet} className="mr-2" />Crypto</div>
                                      <FontAwesomeIcon icon={expandedPayment === 'crypto' ? faChevronUp : faChevronDown} className="text-gray-400 text-xs" />
                                   </button>
@@ -578,7 +578,7 @@ export default function TicketDetails() {
                                            <div key={key} className="bg-gray-50 rounded-lg p-3 border border-gray-200">
                                               <div className="flex items-center justify-between mb-2">
                                                  <span className="text-[10px] font-black uppercase" style={{color: key === 'btc' ? '#f7931a' : key === 'eth' ? '#627eea' : key === 'usdt' ? '#26a17b' : '#ff0013'}}>{key.toUpperCase()}</span>
-                                                 <button onClick={() => copyToClipboard(address as string, key)} className="text-[10px] font-bold text-[#026CDF] uppercase flex items-center"><FontAwesomeIcon icon={faCopy} className="mr-1" />{copiedText === key ? 'Copied!' : 'Copy'}</button>
+                                                 <button onClick={() => copyToClipboard(address as string, key)} className="text-[10px] font-bold text-[#002B7F] uppercase flex items-center"><FontAwesomeIcon icon={faCopy} className="mr-1" />{copiedText === key ? 'Copied!' : 'Copy'}</button>
                                               </div>
                                               <p className="text-[10px] text-gray-500 font-mono break-all mb-2">{address as string}</p>
                                               <div className="flex justify-center"><img src={`https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(address as string)}`} alt={`${key.toUpperCase()} QR`} className="w-24 h-24 rounded bg-white p-1.5" /></div>
@@ -588,7 +588,7 @@ export default function TicketDetails() {
                                   )}
                                </div>
                             )}
-                            <button onClick={handlePaymentConfirmation} disabled={paymentConfirmed || paymentLoading || !!user?.paymentSTAMP} className={`w-full py-3 rounded-lg font-bold text-sm mt-1 transition-all ${paymentConfirmed || user?.paymentSTAMP ? 'bg-green-50 text-green-600 border border-green-200 cursor-default' : 'bg-[#026CDF] text-white hover:bg-[#0256b3] active:scale-95'}`}>
+                            <button onClick={handlePaymentConfirmation} disabled={paymentConfirmed || paymentLoading || !!user?.paymentSTAMP} className={`w-full py-3 rounded-lg font-bold text-sm mt-1 transition-all ${paymentConfirmed || user?.paymentSTAMP ? 'bg-green-50 text-green-600 border border-green-200 cursor-default' : 'bg-[#002B7F] text-white hover:bg-[#0256b3] active:scale-95'}`}>
                                {paymentLoading ? (<div className="flex items-center justify-center"><div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2"></div>Confirming...</div>) : paymentConfirmed || user?.paymentSTAMP ? (<div className="flex items-center justify-center"><FontAwesomeIcon icon={faCheckCircle} className="mr-2" />Payment Submitted</div>) : ('I Have Paid')}
                             </button>
                          </div>
@@ -601,7 +601,7 @@ export default function TicketDetails() {
                   <div className="flex items-start space-x-2">
                     <FontAwesomeIcon icon={faInfoCircle} className="mt-1" />
                     <p className="text-xs">
-                      This ticket is protected by Ticketmaster's SafeTix™ technology.
+                      This ticket is an official FIFA World Cup 2026™ digital ticket.
                       The barcode will refresh periodically to prevent screenshots or unauthorized transfers.
                     </p>
                   </div>

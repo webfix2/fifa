@@ -94,7 +94,7 @@ export default function TransferDetailsPage() {
             case 'RETRACTED':
                 return { icon: faExclamationTriangle, color: 'text-red-500', bg: 'bg-red-50', border: 'border-red-100', banner: 'bg-red-600' };
             default:
-                return { icon: faClock, color: 'text-[#026CDF]', bg: 'bg-amber-50', border: 'border-amber-100', banner: 'bg-[#001B41]' };
+                return { icon: faClock, color: 'text-[#002B7F]', bg: 'bg-amber-50', border: 'border-amber-100', banner: 'bg-[#002B7F]' };
         }
     };
 
@@ -103,13 +103,13 @@ export default function TransferDetailsPage() {
     return (
         <div className="min-h-screen bg-[#f4f7f9] flex flex-col font-sans">
             {/* Header - Reverted to match previous style but keeping the fix */}
-            <header className="bg-white text-[#001B41] border-b border-gray-100 px-4 py-3 fixed top-0 left-0 right-0 z-50">
+            <header className="bg-white text-[#002B7F] border-b border-gray-100 px-4 py-3 fixed top-0 left-0 right-0 z-50">
                 <div className="max-w-3xl mx-auto flex items-center justify-between">
-                    <button onClick={() => router.back()} className="text-[#001B41] hover:opacity-70 transition-opacity p-1">
+                    <button onClick={() => router.back()} className="text-[#002B7F] hover:opacity-70 transition-opacity p-1">
                         <FontAwesomeIcon icon={faChevronLeft} className="text-xl" />
                     </button>
                     <h1 className="text-lg font-black tracking-tight uppercase">Transfer Details</h1>
-                    <button className="text-sm font-bold text-[#001B41] hover:opacity-70 transition-opacity">Help</button>
+                    <button className="text-sm font-bold text-[#002B7F] hover:opacity-70 transition-opacity">Help</button>
                 </div>
             </header>
 
@@ -153,18 +153,18 @@ export default function TransferDetailsPage() {
 
                 {/* Event Details Card */}
                 <div className="bg-white rounded-[24px] shadow-sm border border-gray-100 overflow-hidden">
-                    <div className="bg-[#001B41] px-6 py-3">
+                    <div className="bg-[#002B7F] px-6 py-3">
                         <p className="text-[10px] font-black text-white/60 uppercase tracking-widest">Event Information</p>
                     </div>
                     <div className="p-6">
-                        <h3 className="text-xl font-black text-[#001B41] mb-4">{transfer.eventName}</h3>
+                        <h3 className="text-xl font-black text-[#002B7F] mb-4">{transfer.eventName}</h3>
                         <div className="space-y-3">
                             <div className="flex items-center space-x-3 text-gray-500">
-                                <FontAwesomeIcon icon={faCalendarAlt} className="w-4 text-[#026CDF]" />
+                                <FontAwesomeIcon icon={faCalendarAlt} className="w-4 text-[#002B7F]" />
                                 <span className="text-sm font-bold">{transfer.dateTime}</span>
                             </div>
                             <div className="flex items-center space-x-3 text-gray-500">
-                                <FontAwesomeIcon icon={faMapMarkerAlt} className="w-4 text-[#026CDF]" />
+                                <FontAwesomeIcon icon={faMapMarkerAlt} className="w-4 text-[#002B7F]" />
                                 <span className="text-sm font-bold">{transfer.venue}, {transfer.location}</span>
                             </div>
                         </div>
@@ -172,11 +172,11 @@ export default function TransferDetailsPage() {
                     <div className="bg-gray-50 px-6 py-4 border-t border-gray-100 grid grid-cols-2 gap-4">
                         <div>
                             <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1">Seats</p>
-                            <p className="text-sm font-black text-[#001B41]">{transfer.seatNumbers}</p>
+                            <p className="text-sm font-black text-[#002B7F]">{transfer.seatNumbers}</p>
                         </div>
                         <div>
                             <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1">Section</p>
-                            <p className="text-sm font-black text-[#001B41]">{transfer.section} {transfer.sectionNo}</p>
+                            <p className="text-sm font-black text-[#002B7F]">{transfer.section} {transfer.sectionNo}</p>
                         </div>
                     </div>
                 </div>
@@ -185,11 +185,11 @@ export default function TransferDetailsPage() {
                 <div className="bg-white rounded-[24px] shadow-sm border border-gray-100 p-6">
                     <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">Recipient Information</h4>
                     <div className="flex items-center space-x-4">
-                        <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-[#001B41]">
+                        <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-[#002B7F]">
                             <FontAwesomeIcon icon={faUser} className="text-xl" />
                         </div>
                         <div>
-                            <p className="font-black text-[#001B41]">{transfer.fullName}</p>
+                            <p className="font-black text-[#002B7F]">{transfer.fullName}</p>
                             <p className="text-sm font-bold text-gray-400">{transfer.emailAddress}</p>
                         </div>
                     </div>
@@ -200,11 +200,11 @@ export default function TransferDetailsPage() {
                     <div className="bg-white rounded-[24px] shadow-sm border border-gray-100 p-6">
                         <div className="flex justify-between items-center mb-2">
                             <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Progress</h4>
-                            <span className="text-sm font-black text-[#001B41]">{transfer.percentageStatus}%</span>
+                            <span className="text-sm font-black text-[#002B7F]">{transfer.percentageStatus}%</span>
                         </div>
                         <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
                             <div 
-                                className="bg-[#026CDF] h-2 rounded-full transition-all duration-1000" 
+                                className="bg-[#002B7F] h-2 rounded-full transition-all duration-1000" 
                                 style={{ width: `${transfer.percentageStatus}%` }}
                             />
                         </div>

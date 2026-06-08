@@ -83,7 +83,7 @@ export default function TransfersPage() {
     const getStatusColor = (status: string) => {
         switch (status) {
             case 'WAITING APPROVAL': return 'bg-amber-100 text-amber-600 border-amber-200';
-            case 'WAITING COMPLETION': return 'bg-blue-100 text-[#026CDF] border-blue-200';
+            case 'WAITING COMPLETION': return 'bg-blue-100 text-[#002B7F] border-blue-200';
             case 'COMPLETED': return 'bg-green-100 text-green-600 border-green-200';
             default: return 'bg-gray-100 text-gray-400 border-gray-200';
         }
@@ -115,7 +115,7 @@ export default function TransfersPage() {
                     <input
                         type="text"
                         placeholder="Search transfers..."
-                        className="w-full p-4 pl-12 bg-white border border-gray-200 rounded-xl text-[#1F1F1F] placeholder-gray-400 font-bold text-sm outline-none shadow-sm focus:ring-2 focus:ring-[#026CDF]/20 transition-all"
+                        className="w-full p-4 pl-12 bg-white border border-gray-200 rounded-xl text-[#1F1F1F] placeholder-gray-400 font-bold text-sm outline-none shadow-sm focus:ring-2 focus:ring-[#002B7F]/20 transition-all"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -135,7 +135,7 @@ export default function TransfersPage() {
                             <div className="p-5 flex items-start justify-between">
                                 <div className="flex-1 min-w-0 mr-4">
                                     <div className="flex items-center space-x-3 mb-3">
-                                        <div className="w-10 h-10 rounded-full bg-[#026CDF]/5 text-[#026CDF] flex items-center justify-center flex-shrink-0">
+                                        <div className="w-10 h-10 rounded-full bg-[#002B7F]/5 text-[#002B7F] flex items-center justify-center flex-shrink-0">
                                             <FontAwesomeIcon icon={faUser} className="text-sm" />
                                         </div>
                                         <div>
@@ -145,11 +145,11 @@ export default function TransfersPage() {
                                     </div>
                                     <div className="flex flex-wrap gap-4 text-[11px] font-black text-gray-400 uppercase tracking-widest mt-2">
                                         <span className="flex items-center">
-                                            <FontAwesomeIcon icon={faTicketAlt} className="mr-1.5 text-[#026CDF]" />
+                                            <FontAwesomeIcon icon={faTicketAlt} className="mr-1.5 text-[#002B7F]" />
                                             {transfer.ticketId}
                                         </span>
                                         <span className="flex items-center">
-                                            <FontAwesomeIcon icon={faExchangeAlt} className="mr-1.5 text-[#026CDF]" />
+                                            <FontAwesomeIcon icon={faExchangeAlt} className="mr-1.5 text-[#002B7F]" />
                                             {transfer.seatNumbers}
                                         </span>
                                     </div>

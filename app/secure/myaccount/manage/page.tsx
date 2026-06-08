@@ -210,7 +210,7 @@ export default function ManageDashboard() {
                                 rightElement={
                                     <div 
                                         onClick={(e) => { e.stopPropagation(); setNotificationsEnabled(!notificationsEnabled); }}
-                                        className={`w-12 h-7 rounded-full transition-colors relative cursor-pointer ${notificationsEnabled ? 'bg-[#026CDF]' : 'bg-gray-300'}`}
+                                        className={`w-12 h-7 rounded-full transition-colors relative cursor-pointer ${notificationsEnabled ? 'bg-[#002B7F]' : 'bg-gray-300'}`}
                                     >
                                         <div className={`absolute top-1 w-5 h-5 bg-white rounded-full transition-all ${notificationsEnabled ? 'left-6' : 'left-1'}`}></div>
                                     </div>
@@ -228,8 +228,8 @@ export default function ManageDashboard() {
                                 label="My Location" 
                                 rightElement={
                                     <div className="flex items-center space-x-2">
-                                        <span className="text-[#026CDF] font-bold text-sm">{admin?.accountState || 'N/A'}</span>
-                                        <FontAwesomeIcon icon={faEdit} className="text-[#026CDF] text-xs" />
+                                        <span className="text-[#002B7F] font-bold text-sm">{admin?.accountState || 'N/A'}</span>
+                                        <FontAwesomeIcon icon={faEdit} className="text-[#002B7F] text-xs" />
                                     </div>
                                 }
                             />
@@ -239,8 +239,8 @@ export default function ManageDashboard() {
                                 rightElement={
                                     <div className="flex items-center space-x-2">
                                         {flagUrl && <img src={flagUrl} alt={country} className="w-5 h-3.5 rounded-sm object-cover" />}
-                                        <span className="text-[#026CDF] font-bold text-sm">{admin?.accountCountry || 'N/A'}</span>
-                                        <FontAwesomeIcon icon={faEdit} className="text-[#026CDF] text-xs" />
+                                        <span className="text-[#002B7F] font-bold text-sm">{admin?.accountCountry || 'N/A'}</span>
+                                        <FontAwesomeIcon icon={faEdit} className="text-[#002B7F] text-xs" />
                                     </div>
                                 }
                             />
@@ -295,7 +295,7 @@ export default function ManageDashboard() {
                 <div className="p-4 space-y-6">
                     {admin?.role === 'OWNER' && <SubAdminTable />}
                     <div className="bg-[#1F1F1F] p-8 rounded-2xl border border-white/5 text-center shadow-2xl">
-                        <FontAwesomeIcon icon={faUsers} className="text-[#026CDF] text-5xl mb-4" />
+                        <FontAwesomeIcon icon={faUsers} className="text-[#002B7F] text-5xl mb-4" />
                         <h3 className="text-white text-xl font-black uppercase tracking-tight">Management Portal</h3>
                         <p className="text-white/40 mt-2 font-bold">Manage your sub-admins, tickets and transfers from here.</p>
                     </div>

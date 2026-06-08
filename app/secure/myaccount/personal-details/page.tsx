@@ -164,7 +164,7 @@ export default function PersonalDetailsPage() {
                 {message && (
                     <div className={`mb-6 p-4 rounded-2xl flex items-center space-x-3 ${
                         message.type === 'success' 
-                            ? 'bg-[#026CDF]/10 border border-[#026CDF]/20 text-[#026CDF]' 
+                            ? 'bg-[#002B7F]/10 border border-[#002B7F]/20 text-[#002B7F]' 
                             : 'bg-red-500/10 border border-red-500/20 text-red-500'
                     }`}>
                         <FontAwesomeIcon icon={message.type === 'success' ? faCheckCircle : faTimesCircle} />
@@ -182,7 +182,7 @@ export default function PersonalDetailsPage() {
                                     name="accountName"
                                     value={formData.accountName}
                                     onChange={handleChange}
-                                    className="w-full p-4 bg-white/5 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white/10 outline-none transition-all font-bold text-white placeholder-white/20"
+                                    className="w-full p-4 bg-white/5 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white/10 outline-none transition-all font-bold text-white placeholder-white/20"
                                     placeholder="Enter your account name"
                                 />
                             </div>
@@ -194,7 +194,7 @@ export default function PersonalDetailsPage() {
                                     name="accountEmail"
                                     value={formData.accountEmail}
                                     onChange={handleChange}
-                                    className="w-full p-4 bg-white/5 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white/10 outline-none transition-all font-bold text-white placeholder-white/20"
+                                    className="w-full p-4 bg-white/5 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white/10 outline-none transition-all font-bold text-white placeholder-white/20"
                                     placeholder="Enter your account email"
                                 />
                             </div>
@@ -206,7 +206,7 @@ export default function PersonalDetailsPage() {
                                     name="accountStateCountry"
                                     value={formData.accountStateCountry}
                                     onChange={handleChange}
-                                    className="w-full p-4 bg-white/5 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white/10 outline-none transition-all font-bold text-white placeholder-white/20"
+                                    className="w-full p-4 bg-white/5 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white/10 outline-none transition-all font-bold text-white placeholder-white/20"
                                     placeholder="Enter your state or country"
                                 />
                             </div>
@@ -221,7 +221,7 @@ export default function PersonalDetailsPage() {
                                              name="telegramId"
                                              value={formData.telegramId}
                                              onChange={handleChange}
-                                             className="w-full p-4 bg-white/10 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white/20 outline-none transition-all font-bold text-white placeholder-white/20"
+                                             className="w-full p-4 bg-white/10 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white/20 outline-none transition-all font-bold text-white placeholder-white/20"
                                              placeholder="Enter your Telegram ID"
                                          />
                                      </div>
@@ -232,7 +232,7 @@ export default function PersonalDetailsPage() {
                                 <button
                                     onClick={handleSave}
                                     disabled={saving}
-                                    className="w-full bg-[#026CDF] text-white py-4 rounded-2xl font-black text-sm uppercase tracking-widest shadow-lg shadow-[#026CDF]/20 hover:scale-[1.01] active:scale-[0.98] transition-all flex items-center justify-center"
+                                    className="w-full bg-[#002B7F] text-white py-4 rounded-2xl font-black text-sm uppercase tracking-widest shadow-lg shadow-[#002B7F]/20 hover:scale-[1.01] active:scale-[0.98] transition-all flex items-center justify-center"
                                 >
                                     {saving ? (
                                         <>

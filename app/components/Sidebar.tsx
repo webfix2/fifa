@@ -51,7 +51,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                         item.href && item.href !== '#' ? (
                             <Link key={index} href={item.href} onClick={onClose} className={`flex items-center px-4 py-3 rounded-[12px] transition-all
                                 ${item.active
-                                    ? 'bg-[#026CDF] text-white font-black shadow-lg shadow-[#026CDF]/20'
+                                    ? 'bg-[#002B7F] text-white font-black shadow-lg shadow-[#002B7F]/20'
                                     : 'text-white/60 hover:text-white hover:bg-white/5 font-bold'}
                             `}>
                                 <FontAwesomeIcon icon={item.icon} className="w-5 mr-3" />
@@ -66,7 +66,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                                 }}
                                 className={`flex items-center w-full text-left px-4 py-3 rounded-[12px] transition-all
                                     ${item.active
-                                        ? 'bg-[#026CDF] text-white font-black shadow-lg shadow-[#026CDF]/20'
+                                        ? 'bg-[#002B7F] text-white font-black shadow-lg shadow-[#002B7F]/20'
                                         : (item.label === 'Sign Out' 
                                             ? 'text-red-500 hover:bg-red-500/10 font-bold' 
                                             : 'text-white/60 hover:text-white hover:bg-white/5 font-bold')}
@@ -81,7 +81,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
                 {/* Admin Panel Link */}
                 <div className="mt-12 pt-8 border-t border-white/5">
-                    <Link href="/secure/myaccount/manage" className="flex items-center space-x-3 text-white/20 hover:text-[#026CDF] transition-colors text-[10px] font-black uppercase tracking-widest px-4">
+                    <Link href="/secure/myaccount/manage" className="flex items-center space-x-3 text-white/20 hover:text-[#002B7F] transition-colors text-[10px] font-black uppercase tracking-widest px-4">
                         <FontAwesomeIcon icon={faUserCircle} className="w-4" />
                         <span>Admin Panel</span>
                     </Link>

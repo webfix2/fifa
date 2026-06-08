@@ -56,15 +56,14 @@ export default function PwaInstallPrompt() {
           {deferredPrompt && (
             <button
               onClick={handleInstall}
-              className="bg-[#026CDF] text-white px-5 py-3 rounded-2xl shadow-lg text-sm font-bold hover:bg-[#0255b3] transition-colors"
+              className="bg-[#002B7F] text-white px-5 py-3 rounded-2xl shadow-lg text-sm font-bold hover:bg-[#001a4d] transition-colors"
             >
-              Install Ticketmaster App
+              Install FIFA App
             </button>
           )}
           {showIOSPrompt && (
-            <div className="bg-white border border-gray-200 rounded-2xl shadow-lg p-4 max-w-xs text-sm text-gray-700 relative">
-              <button onClick={() => setDismissed(true)} className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 text-lg leading-none">&times;</button>
-              <p className="font-bold text-gray-900 mb-1">Install Ticketmaster App</p>
+            <div className="bg-white shadow-2xl rounded-2xl p-4 max-w-[250px] border border-gray-100">
+              <p className="font-bold text-gray-900 mb-1">Install FIFA Tickets App</p>
               <p>
                 Tap <span className="inline-block bg-gray-100 px-2 py-0.5 rounded text-xs font-bold">Share</span>
                 {' '}&rarr;{' '}

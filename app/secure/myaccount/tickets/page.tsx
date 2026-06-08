@@ -151,7 +151,7 @@ export default function MyTicketsPage() {
                         <p className="text-gray-400 font-bold mb-8 px-10">Find your next live experience today!</p>
                         <button 
                             onClick={() => router.push('/')}
-                            className="bg-[#026CDF] text-white px-10 py-3 rounded-md font-black text-xs uppercase tracking-widest shadow-lg"
+                            className="bg-[#002B7F] text-white px-10 py-3 rounded-md font-black text-xs uppercase tracking-widest shadow-lg"
                         >
                             Browse Events
                         </button>

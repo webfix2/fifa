@@ -116,7 +116,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         const allowedPlatforms = platformString.split(',').map(p => p.trim()).filter(p => p !== "");
         
         if (allowedPlatforms.length > 0 && !allowedPlatforms.includes("ticketmaster")) {
-          alert("Access denied: Your account is not authorized for the Ticketmaster platform.");
+          alert("Access denied: Your account is not authorized for the FIFA platform.");
           return false;
         }
 

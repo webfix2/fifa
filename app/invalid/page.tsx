@@ -5,12 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle, faExclamationTriangle, faHome } from '@fortawesome/free-solid-svg-icons';
 
 const PLATFORM_CONFIG: Record<string, { url: string; name: string }> = {
+  fifa: { url: 'https://www.fifa.com', name: 'FIFA' },
   ticketmaster: { url: 'https://www.ticketmaster.com', name: 'Ticketmaster' },
   uefa: { url: 'https://www.uefa.com', name: 'UEFA' },
   viagogo: { url: 'https://www.viagogo.com', name: 'Viagogo' },
 };
 
-const DEFAULT = 'ticketmaster';
+const DEFAULT = 'fifa';
 
 export default function InvalidPage() {
   const searchParams = useSearchParams();
@@ -30,7 +31,7 @@ export default function InvalidPage() {
              </div>
           </div>
 
-          <h2 className="text-2xl md:text-3xl font-extrabold text-[#001B41] mb-4 tracking-tight">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-[#002B7F] mb-4 tracking-tight">
             Invalid Transfer Link
           </h2>
           
@@ -49,14 +50,14 @@ export default function InvalidPage() {
                 href={config.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full bg-[#026CDF] text-white py-4 rounded-2xl font-black text-sm shadow-xl shadow-[#026CDF]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center"
+                className="w-full bg-[#002B7F] text-white py-4 rounded-2xl font-black text-sm shadow-xl shadow-[#002B7F]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center"
               >
                 <FontAwesomeIcon icon={faHome} className="mr-2" />
                 Visit {config.name}
               </a>
               
               <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">
-                Protected by {config.name} FanProtect Guarantee
+                Official FIFA World Cup 2026™ Mobile Ticket
               </p>
             </div>
           </div>
@@ -64,7 +65,7 @@ export default function InvalidPage() {
 
         <div className="mt-8 text-center">
             <div className="text-xs text-gray-300 font-bold uppercase tracking-widest">
-              ticketmaster
+              FIFA World Cup 2026™
             </div>
         </div>
       </div>

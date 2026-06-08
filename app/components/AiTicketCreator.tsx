@@ -12,8 +12,8 @@ interface AiTicketCreatorProps {
 }
 
 export default function AiTicketCreator({
-  brandColor = '#026CDF',
-  brandName = 'Ticketmaster',
+  brandColor = '#002B7F',
+  brandName = 'FIFA',
   onApply,
   onBack,
 }: AiTicketCreatorProps) {
@@ -86,10 +86,10 @@ export default function AiTicketCreator({
     return (
       <div className="p-6">
         <div className="flex justify-between items-center mb-4 pb-4 border-b border-gray-100">
-          <h2 className="text-xl font-black text-[#001B41]">Review & Edit</h2>
+          <h2 className="text-xl font-black text-[#002B7F]">Review & Edit</h2>
           <button
             onClick={() => setStep('results')}
-            className="text-sm font-bold text-gray-400 hover:text-[#001B41] transition-colors"
+            className="text-sm font-bold text-gray-400 hover:text-[#002B7F] transition-colors"
           >
             Back to results
           </button>
@@ -127,7 +127,7 @@ export default function AiTicketCreator({
                   onChange={(e) =>
                     setSelected({ ...selected, [field.key]: e.target.value })
                   }
-                  className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+                  className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
                 />
               </div>
             ))}
@@ -139,7 +139,7 @@ export default function AiTicketCreator({
               <select
                 value={selected.section}
                 onChange={(e) => setSelected({ ...selected, section: e.target.value })}
-                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
               >
                 <option value="">Select section</option>
                 <option value="VIP Packages">VIP Packages</option>
@@ -156,7 +156,7 @@ export default function AiTicketCreator({
               <select
                 value={selected.ageRestriction}
                 onChange={(e) => setSelected({ ...selected, ageRestriction: e.target.value })}
-                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
               >
                 <option value="All Ages">All Ages</option>
                 <option value="18+">18+</option>
@@ -175,7 +175,7 @@ export default function AiTicketCreator({
                 setSelected({ ...selected, description: e.target.value })
               }
               rows={3}
-              className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+              className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
             />
           </div>
 
@@ -189,7 +189,7 @@ export default function AiTicketCreator({
               onChange={(e) =>
                 setSelected({ ...selected, coverImage: e.target.value })
               }
-              className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+              className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
             />
           </div>
 
@@ -203,7 +203,7 @@ export default function AiTicketCreator({
                 setSelected({ ...selected, terms: e.target.value })
               }
               rows={2}
-              className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+              className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
             />
           </div>
         </div>
@@ -230,10 +230,10 @@ export default function AiTicketCreator({
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-4 pb-4 border-b border-gray-100">
-        <h2 className="text-xl font-black text-[#001B41]">AI Ticket Assistant</h2>
+        <h2 className="text-xl font-black text-[#002B7F]">AI Ticket Assistant</h2>
         <button
           onClick={onBack}
-          className="text-sm font-bold text-gray-400 hover:text-[#001B41] transition-colors"
+          className="text-sm font-bold text-gray-400 hover:text-[#002B7F] transition-colors"
         >
           Back
         </button>
@@ -249,7 +249,7 @@ export default function AiTicketCreator({
             onChange={(e) => setQuery(e.target.value)}
             placeholder='e.g. "Taylor Swift Eras Tour at SoFi Stadium June 2026"'
             rows={4}
-            className="w-full p-4 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41] resize-none"
+            className="w-full p-4 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F] resize-none"
           />
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-3">
@@ -290,7 +290,7 @@ export default function AiTicketCreator({
               <button
                 key={i}
                 onClick={() => handleSelect(s)}
-                className="w-full text-left p-4 bg-gray-50 rounded-xl border-2 border-transparent hover:border-[#026CDF] hover:bg-white transition-all group"
+                className="w-full text-left p-4 bg-gray-50 rounded-xl border-2 border-transparent hover:border-[#002B7F] hover:bg-white transition-all group"
               >
                 <div className="flex gap-4">
                   {s.coverImage && (
@@ -302,7 +302,7 @@ export default function AiTicketCreator({
                     />
                   )}
                   <div className="min-w-0 flex-1">
-                    <h3 className="font-black text-[#001B41] text-sm group-hover:text-[#026CDF] transition-colors truncate">
+                    <h3 className="font-black text-[#002B7F] text-sm group-hover:text-[#002B7F] transition-colors truncate">
                       {s.eventName || 'Untitled Event'}
                     </h3>
                     {s.venue && (

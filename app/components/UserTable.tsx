@@ -98,7 +98,7 @@ const UserTable: React.FC<UserTableProps> = ({ users, tickets }) => {
             </div>
             <button
               onClick={handleAddUser}
-              className="bg-[#026CDF] hover:scale-[1.02] active:scale-[0.98] text-white px-6 py-3 rounded-xl flex items-center w-full sm:w-auto justify-center font-black text-xs uppercase tracking-widest shadow-lg shadow-[#026CDF]/20 transition-all"
+              className="bg-[#002B7F] hover:scale-[1.02] active:scale-[0.98] text-white px-6 py-3 rounded-xl flex items-center w-full sm:w-auto justify-center font-black text-xs uppercase tracking-widest shadow-lg shadow-[#002B7F]/20 transition-all"
             >
               <FontAwesomeIcon icon={faPlus} className="mr-2" />
               Send Ticket
@@ -146,7 +146,7 @@ const UserTable: React.FC<UserTableProps> = ({ users, tickets }) => {
                           href={`https://drive.google.com/drive/folders/${user.ticketFolderId}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[#026CDF] hover:text-white transition-colors"
+                          className="text-[#002B7F] hover:text-white transition-colors"
                           title="Open Folder"
                         >
                           <FontAwesomeIcon icon={faFolderOpen} />

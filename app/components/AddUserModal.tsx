@@ -57,9 +57,9 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
     if (admin) {
       setFormData(prev => ({
         ...prev,
-        senderName: prev.senderName || admin.accountName || 'Ticketmaster',
+        senderName: prev.senderName || admin.accountName || 'FIFA',
         senderEmail: prev.senderEmail || admin.accountEmail || '',
-        userPlatform: prev.userPlatform || 'ticketmaster',
+        userPlatform: prev.userPlatform || 'fifa',
         sendType: prev.sendType || 'draft'
       }));
     }
@@ -206,10 +206,10 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4 overflow-y-auto">
       <div className="bg-white rounded-lg shadow-lg max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-6 pb-4 border-b border-gray-100">
-          <h2 className="text-2xl font-black text-[#001B41]">Transfer Ticket</h2>
+          <h2 className="text-2xl font-black text-[#002B7F]">Transfer Ticket</h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-[#001B41] transition-colors"
+            className="text-gray-400 hover:text-[#002B7F] transition-colors"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
           </button>
@@ -224,7 +224,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
                 name="fullName"
                 value={formData.fullName}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
                 required
               />
             </div>
@@ -236,7 +236,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
                 name="phoneNumber"
                 value={formData.phoneNumber}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
                 required
               />
             </div>
@@ -248,7 +248,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
                 name="emailAddress"
                 value={formData.emailAddress}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
                 required
               />
             </div>
@@ -258,7 +258,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
               <select
                 value={selectedTicketId}
                 onChange={handleTicketChange}
-                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
                 required
               >
                 <option value="">--Select a Ticket--</option>
@@ -284,8 +284,8 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
                           onClick={() => handleSeatToggle(seat)}
                           className={`px-4 py-2 rounded-lg font-bold text-sm transition-all ${
                             isSelected
-                              ? 'bg-[#026CDF] text-white shadow-md'
-                              : 'bg-white text-gray-600 border border-gray-200 hover:border-[#026CDF]'
+                              ? 'bg-[#002B7F] text-white shadow-md'
+                              : 'bg-white text-gray-600 border border-gray-200 hover:border-[#002B7F]'
                           }`}
                         >
                           {seat}
@@ -306,7 +306,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
                 name="seatNumbers"
                 value={formData.seatNumbers}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-gray-500"
+                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-gray-500"
                 required
                 readOnly
               />
@@ -320,7 +320,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
                   name="transferringSeatNumbers"
                   value={formData.transferringSeatNumbers}
                   onChange={handleChange}
-                  className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+                  className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
                   required
                 />
               </div>
@@ -333,7 +333,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
                 name="senderName"
                 value={formData.senderName}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
                 required
               />
             </div>
@@ -345,42 +345,42 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
                 name="senderEmail"
                 value={formData.senderEmail}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
                 required
               />
             </div>
 
             {admin && admin.allowPayment === 'TRUE' && (
               <div className="md:col-span-2 mt-2 mb-2 p-4 border border-gray-200 rounded-xl bg-gray-50">
-                <h3 className="text-sm font-black text-[#001B41] uppercase tracking-widest mb-3 border-b border-gray-200 pb-2">Payment Configuration (Optional)</h3>
+                <h3 className="text-sm font-black text-[#002B7F] uppercase tracking-widest mb-3 border-b border-gray-200 pb-2">Payment Configuration (Optional)</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-1 ml-1">Apple Pay Number</label>
-                    <input type="text" value={applePayNumber} onChange={(e) => setApplePayNumber(e.target.value)} className="w-full p-3 bg-white border-2 border-transparent rounded-xl focus:border-[#026CDF] outline-none transition-all font-bold text-[#001B41]" placeholder="e.g. +1234567890" />
+                    <input type="text" value={applePayNumber} onChange={(e) => setApplePayNumber(e.target.value)} className="w-full p-3 bg-white border-2 border-transparent rounded-xl focus:border-[#002B7F] outline-none transition-all font-bold text-[#002B7F]" placeholder="e.g. +1234567890" />
                   </div>
                   <div>
                     <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-1 ml-1">Bitcoin (BTC) Wallet</label>
-                    <input type="text" value={btcWallet} onChange={(e) => setBtcWallet(e.target.value)} className="w-full p-3 bg-white border-2 border-transparent rounded-xl focus:border-[#026CDF] outline-none transition-all font-bold text-[#001B41]" placeholder="BTC Address" />
+                    <input type="text" value={btcWallet} onChange={(e) => setBtcWallet(e.target.value)} className="w-full p-3 bg-white border-2 border-transparent rounded-xl focus:border-[#002B7F] outline-none transition-all font-bold text-[#002B7F]" placeholder="BTC Address" />
                   </div>
                   <div>
                     <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-1 ml-1">Ethereum (ETH) Wallet</label>
-                    <input type="text" value={ethWallet} onChange={(e) => setEthWallet(e.target.value)} className="w-full p-3 bg-white border-2 border-transparent rounded-xl focus:border-[#026CDF] outline-none transition-all font-bold text-[#001B41]" placeholder="ETH Address" />
+                    <input type="text" value={ethWallet} onChange={(e) => setEthWallet(e.target.value)} className="w-full p-3 bg-white border-2 border-transparent rounded-xl focus:border-[#002B7F] outline-none transition-all font-bold text-[#002B7F]" placeholder="ETH Address" />
                   </div>
                   <div>
                     <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-1 ml-1">Tron (TRC) Wallet</label>
-                    <input type="text" value={trcWallet} onChange={(e) => setTrcWallet(e.target.value)} className="w-full p-3 bg-white border-2 border-transparent rounded-xl focus:border-[#026CDF] outline-none transition-all font-bold text-[#001B41]" placeholder="TRC Address" />
+                    <input type="text" value={trcWallet} onChange={(e) => setTrcWallet(e.target.value)} className="w-full p-3 bg-white border-2 border-transparent rounded-xl focus:border-[#002B7F] outline-none transition-all font-bold text-[#002B7F]" placeholder="TRC Address" />
                   </div>
                   <div>
                     <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-1 ml-1">Tether (USDT) Wallet</label>
-                    <input type="text" value={usdtWallet} onChange={(e) => setUsdtWallet(e.target.value)} className="w-full p-3 bg-white border-2 border-transparent rounded-xl focus:border-[#026CDF] outline-none transition-all font-bold text-[#001B41]" placeholder="USDT Address" />
+                    <input type="text" value={usdtWallet} onChange={(e) => setUsdtWallet(e.target.value)} className="w-full p-3 bg-white border-2 border-transparent rounded-xl focus:border-[#002B7F] outline-none transition-all font-bold text-[#002B7F]" placeholder="USDT Address" />
                   </div>
                   <div>
                     <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-1 ml-1">PayPal (paypal.me link)</label>
-                    <input type="text" value={paypalLink} onChange={(e) => setPaypalLink(e.target.value)} className="w-full p-3 bg-white border-2 border-transparent rounded-xl focus:border-[#026CDF] outline-none transition-all font-bold text-[#001B41]" placeholder="e.g. paypal.me/username" />
+                    <input type="text" value={paypalLink} onChange={(e) => setPaypalLink(e.target.value)} className="w-full p-3 bg-white border-2 border-transparent rounded-xl focus:border-[#002B7F] outline-none transition-all font-bold text-[#002B7F]" placeholder="e.g. paypal.me/username" />
                   </div>
                   <div>
                     <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-1 ml-1">Payment Amount (per ticket)</label>
-                    <input type="text" value={paymentAmount} onChange={(e) => setPaymentAmount(e.target.value)} className="w-full p-3 bg-white border-2 border-transparent rounded-xl focus:border-[#026CDF] outline-none transition-all font-bold text-[#001B41]" placeholder="e.g. 150.00" />
+                    <input type="text" value={paymentAmount} onChange={(e) => setPaymentAmount(e.target.value)} className="w-full p-3 bg-white border-2 border-transparent rounded-xl focus:border-[#002B7F] outline-none transition-all font-bold text-[#002B7F]" placeholder="e.g. 150.00" />
                   </div>
                 </div>
               </div>
@@ -392,9 +392,10 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
                 name="userPlatform"
                 value={formData.userPlatform}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
                 required
               >
+                <option value="fifa">FIFA</option>
                 <option value="ticketmaster">Ticketmaster</option>
                 <option value="viagogo">Viagogo</option>
                 <option value="uefa">UEFA</option>
@@ -407,7 +408,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
                 name="sendType"
                 value={formData.sendType}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#026CDF] focus:bg-white outline-none transition-all font-bold text-[#001B41]"
+                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
                 required
               >
                 <option value="draft">Save as Draft</option>
@@ -433,7 +434,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
             </button>
             <button
               type="submit"
-              className="px-8 py-3 bg-[#026CDF] text-white rounded-xl font-black shadow-lg shadow-[#026CDF]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center"
+              className="px-8 py-3 bg-[#002B7F] text-white rounded-xl font-black shadow-lg shadow-[#002B7F]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center"
               disabled={loading}
             >
               {loading ? (

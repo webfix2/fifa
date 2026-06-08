@@ -13,24 +13,26 @@ import HideSplash from './HideSplash';
 config.autoAddCss = false;
 const inter = Inter({ subsets: ['latin'] });
 
+const FAVICON = 'https://play-lh.googleusercontent.com/nQLbIovsHYyx1EhAHYc2gdNO9MIIdDLkWWXHuKnLoSVcaOCRtsHPdiYcVQ3tieTe8F3EkKGZVHdcQRO3rU48=w240-h480-rw';
+
 export const metadata = {
-  title: 'Tickets - Buy and Sell Concert, Sports & Theatre Tickets | Ticketmaster',
-  description: 'Search and buy tickets for your favorite artists, teams, and shows at Ticketmaster.',
-  keywords: 'ticketmaster, buy tickets, sell tickets, concert, sport, theater',
+  title: 'FIFA World Cup 2026™ - Official Mobile Tickets',
+  description: 'Send, receive, and manage your FIFA World Cup 2026™ match tickets with the official FIFA Mobile Tickets application.',
+  keywords: 'fifa, world cup, 2026, tickets, football, soccer, mobile tickets, fwc2026',
   manifest: '/manifest.json',
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover',
   icons: {
     icon: [
-      { url: 'https://lh3.googleusercontent.com/a-/ALV-UjXmI_R6mr2s1KnPXx7t5KhgAe9drmgY8So16bDQ9clqysQp-jQ=s300-p-k-rw-no' },
+      { url: FAVICON },
     ],
-    shortcut: 'https://lh3.googleusercontent.com/a-/ALV-UjXmI_R6mr2s1KnPXx7t5KhgAe9drmgY8So16bDQ9clqysQp-jQ=s300-p-k-rw-no',
-    apple: 'https://lh3.googleusercontent.com/a-/ALV-UjXmI_R6mr2s1KnPXx7t5KhgAe9drmgY8So16bDQ9clqysQp-jQ=s300-p-k-rw-no',
+    shortcut: FAVICON,
+    apple: FAVICON,
   },
   openGraph: {
-    url: 'https://www.ticketmaster.com/',
-    title: 'Tickets - Buy and Sell Concert, Sports & Theatre Tickets | Ticketmaster',
-    description: 'Search and buy tickets for your favorite artists, teams, and shows at Ticketmaster.',
-    siteName: 'ticketmaster.com',
+    url: 'https://intl-fifa.com/',
+    title: 'FIFA World Cup 2026™ - Official Mobile Tickets',
+    description: 'Send, receive, and manage your FIFA World Cup 2026™ match tickets with the official FIFA Mobile Tickets application.',
+    siteName: 'fifa.com',
     type: 'website',
   },
 };
@@ -43,17 +45,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="theme-color" content="#026CDF" />
+        <meta name="theme-color" content="#002B7F" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="Ticketmaster" />
+        <meta name="apple-mobile-web-app-title" content="FIFA Tickets" />
         <link rel="apple-touch-startup-image" href="/splash-1024x1024.png" />
-        <link rel="icon" href="https://lh3.googleusercontent.com/a-/ALV-UjXmI_R6mr2s1KnPXx7t5KhgAe9drmgY8So16bDQ9clqysQp-jQ=s300-p-k-rw-no" />
-        <link rel="shortcut icon" href="https://lh3.googleusercontent.com/a-/ALV-UjXmI_R6mr2s1KnPXx7t5KhgAe9drmgY8So16bDQ9clqysQp-jQ=s300-p-k-rw-no" />
-        <link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/a-/ALV-UjXmI_R6mr2s1KnPXx7t5KhgAe9drmgY8So16bDQ9clqysQp-jQ=s300-p-k-rw-no" />
+        <link rel="icon" href={FAVICON} />
+        <link rel="shortcut icon" href={FAVICON} />
+        <link rel="apple-touch-icon" href={FAVICON} />
         <style>{`
-          html { background: #1F1F1F; }
+          html { background: #002B7F; }
           body {
             padding-bottom: env(safe-area-inset-bottom);
             overscroll-behavior: none;
@@ -67,7 +69,7 @@ export default function RootLayout({
           #splash-screen {
             position: fixed; inset: 0; z-index: 99999;
             display: flex; align-items: center; justify-content: center;
-            background: #026CDF;
+            background: #002B7F;
             opacity: 1; transition: opacity 0.4s ease;
             pointer-events: none;
           }
@@ -79,7 +81,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <div id="splash-screen" suppressHydrationWarning>
-          <img src="https://lh3.googleusercontent.com/a-/ALV-UjXmI_R6mr2s1KnPXx7t5KhgAe9drmgY8So16bDQ9clqysQp-jQ=s300-p-k-rw-no" alt="" />
+          <img src={FAVICON} alt="FIFA" />
         </div>
         <HideSplash />
         <UserProvider>
