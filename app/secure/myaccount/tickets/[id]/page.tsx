@@ -99,8 +99,7 @@ export default function TicketDetailsAccountPage() {
                     <FontAwesomeIcon icon={faChevronLeft} className="text-lg" />
                 </Link>
                 <div className="text-center">
-                    <p className="text-sm font-bold text-gray-800">Ticket {ticketIndex} of {totalTickets || 1}</p>
-                    <div className="flex items-center justify-center space-x-1.5 mt-1">
+                    <div className="flex items-center justify-center space-x-1.5">
                         {Array.from({ length: Math.min(totalTickets || 1, 5) }).map((_, i) => (
                             <div
                                 key={i}

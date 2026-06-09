@@ -137,7 +137,7 @@ export default function ManageDashboard() {
 
                         {/* Card 3: Info & Support */}
                         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                            <MenuItem icon={faLink} label="More information" />
+                            <MenuItem icon={faLink} label="More information" action={() => setActiveTab('management')} />
                             <div className="border-t border-gray-50" />
                             <MenuItem icon={faHeadset} label="Support details" />
                         </div>
