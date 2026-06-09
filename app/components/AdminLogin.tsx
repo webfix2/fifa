@@ -85,7 +85,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ setLoggedInAdmin, setUsers }) =
     if (redirecting) return null;
 
     return (
-        <div className="min-h-screen flex flex-col md:flex-row bg-white">
+        <div className="min-h-screen flex flex-col md:flex-row bg-white pt-[env(safe-area-inset-top)]">
             {/* Left — Hero Image */}
             <div className="hidden md:flex md:w-[60%] relative items-end justify-start overflow-hidden">
                 <div

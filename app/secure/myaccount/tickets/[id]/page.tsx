@@ -89,7 +89,7 @@ export default function TicketDetailsAccountPage() {
     const seat = seats[0] || '--';
 
     return (
-        <div className="min-h-screen bg-[#F5F5F5] flex flex-col">
+        <div className="min-h-screen bg-[#F5F5F5] flex flex-col pt-[env(safe-area-inset-top)]">
             {/* Top bar */}
             <div className="bg-white px-4 py-3 flex items-center justify-between border-b border-gray-100">
                 <Link
@@ -168,21 +168,14 @@ export default function TicketDetailsAccountPage() {
 
                 <div className="grid grid-cols-3 gap-3">
                     <div className="border border-gray-200 rounded-xl p-3 text-center">
-                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">HOSPITALITY AREA</p>
-                        <p className="text-sm font-black text-[#1F1F1F]">{suite}</p>
-                    </div>
-                    <div className="border border-gray-200 rounded-xl p-3 text-center">
                         <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">SUITE</p>
-                        <p className="text-lg font-black text-[#1F1F1F]">{ticket.sectionNo || '--'}</p>
+                        <p className="text-sm font-black text-[#1F1F1F]">{suite}</p>
                     </div>
                     <div className="border border-gray-200 rounded-xl p-3 text-center">
                         <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">ROW</p>
                         <p className="text-lg font-black text-[#1F1F1F]">{ticket.row || '--'}</p>
                     </div>
-                </div>
-
-                <div className="flex justify-center">
-                    <div className="border border-gray-200 rounded-xl p-3 text-center w-[33%]">
+                    <div className="border border-gray-200 rounded-xl p-3 text-center">
                         <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">SEAT</p>
                         <p className="text-lg font-black text-[#1F1F1F]">{seat}</p>
                     </div>

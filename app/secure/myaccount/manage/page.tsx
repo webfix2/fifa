@@ -106,11 +106,11 @@ export default function ManageDashboard() {
                         <FontAwesomeIcon icon={faChevronLeft} />
                     </button>
                     <div className="flex bg-gray-100 rounded-lg p-1">
-                        {[
+                        {([
                             { key: 'management', label: 'Management', icon: faBuilding },
                             { key: 'transfers', label: 'Transfers', icon: faPaperPlane },
                             { key: 'tickets', label: 'Tickets', icon: faTicket },
-                        ].map((tab) => (
+                        ] as const).map((tab) => (
                             <button
                                 key={tab.key}
                                 onClick={() => setActiveTab(tab.key)}
