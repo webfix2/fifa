@@ -19,7 +19,10 @@ import {
     faLink,
     faHeadset,
     faRightFromBracket,
-    faUsers
+    faUsers,
+    faTicket,
+    faPaperPlane,
+    faBuilding
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function ManageDashboard() {
@@ -98,23 +101,37 @@ export default function ManageDashboard() {
     return (
         <div className="flex-1 flex flex-col min-h-full pb-32">
             {activeTab !== 'account' && (
-                <div className="bg-white p-4 border-b border-gray-100 flex items-center sticky top-[72px] z-40">
-                    <button onClick={() => setActiveTab('account')} className="mr-4 text-gray-500 hover:text-[#1F1F1F] transition-colors">
+                <div className="bg-white p-4 border-b border-gray-100 flex items-center justify-between sticky top-[72px] z-40">
+                    <button onClick={() => setActiveTab('account')} className="text-gray-500 hover:text-[#1F1F1F] transition-colors">
                         <FontAwesomeIcon icon={faChevronLeft} />
                     </button>
-                    <h2 className="text-base font-bold text-[#1F1F1F]">
-                        {activeTab === 'management' ? 'Management' : activeTab === 'transfers' ? 'Transfers' : 'Tickets'}
-                    </h2>
+                    <div className="flex bg-gray-100 rounded-lg p-1">
+                        {[
+                            { key: 'management', label: 'Management', icon: faBuilding },
+                            { key: 'transfers', label: 'Transfers', icon: faPaperPlane },
+                            { key: 'tickets', label: 'Tickets', icon: faTicket },
+                        ].map((tab) => (
+                            <button
+                                key={tab.key}
+                                onClick={() => setActiveTab(tab.key)}
+                                className={`flex items-center space-x-2 px-4 py-2 rounded-md text-xs font-bold transition-all ${
+                                    activeTab === tab.key
+                                        ? 'bg-white text-[#002B7F] shadow-sm'
+                                        : 'text-gray-500 hover:text-[#1F1F1F]'
+                                }`}
+                            >
+                                <FontAwesomeIcon icon={tab.icon} />
+                                <span>{tab.label}</span>
+                            </button>
+                        ))}
+                    </div>
                 </div>
             )}
 
             {activeTab === 'account' && (
                 <>
                     {/* Email Header */}
-                    <div className="px-6 pt-8 pb-6">
-                        <button onClick={() => router.back()} className="mb-4 text-gray-500">
-                            <FontAwesomeIcon icon={faChevronLeft} className="text-lg" />
-                        </button>
+                    <div className="px-6 pt-6 pb-6">
                         <h1 className="text-2xl font-black text-[#1F1F1F] break-all">
                             {admin.accountEmail || 'user@virtualmail.com'}
                         </h1>
