@@ -5,26 +5,30 @@ import { useRouter, useParams } from 'next/navigation';
 import { useUser } from '../../../../UserContext';
 import { Ticket } from '../../../../types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-    faChevronLeft,
-    faCalendarAlt,
-    faMapMarkerAlt,
-    faChevronRight,
-    faBarcode,
-    faEllipsisV,
-    faMap,
-    faShareAlt,
-    faRoute,
-    faUserCircle
-} from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faCalendarAlt, faMapMarkerAlt, faUniversalAccess } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import TransferModal from '../../../../components/TransferModal';
+
+function formatDate(dt: string): string {
+    if (!dt) return '';
+    try {
+        const d = new Date(dt);
+        if (isNaN(d.getTime())) return dt;
+        const day = d.getDate();
+        const month = d.toLocaleString('en-US', { month: 'short' }).toUpperCase();
+        const year = d.getFullYear();
+        const time = d.toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+        return `${day} ${month} ${year}, ${time}`;
+    } catch {
+        return dt;
+    }
+}
 
 export default function TicketDetailsAccountPage() {
     const router = useRouter();
     const params = useParams();
     const ticketId = params.id as string;
-    
+
     const {
         admin,
         tickets: allTickets,
@@ -38,7 +42,8 @@ export default function TicketDetailsAccountPage() {
     const [ticket, setTicket] = useState<Ticket | null>(null);
     const [isSessionValid, setIsSessionValid] = useState<boolean | null>(null);
     const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
-    const [activeTab, setActiveTab] = useState<'tickets' | 'extras'>('tickets');
+    const [isFabOpen, setIsFabOpen] = useState(false);
+    const [ticketIndex, setTicketIndex] = useState(1);
 
     useEffect(() => {
         const adminToken = localStorage.getItem("adminToken");
@@ -67,204 +72,161 @@ export default function TicketDetailsAccountPage() {
             const foundTicket = allTickets.find(t => t.ticketId === ticketId || t.sn === ticketId);
             if (foundTicket) {
                 setTicket(foundTicket);
+                const idx = allTickets.findIndex(t => t.ticketId === ticketId || t.sn === ticketId);
+                setTicketIndex(idx >= 0 ? idx + 1 : 1);
             }
         }
     }, [allTickets, ticketId, isSessionValid]);
 
     if (isSessionValid === null || !ticket) return null;
 
-    const seats = ticket.seatNumbers ? ticket.seatNumbers.split(',').map(s => s.trim()) : [ticket.seat || '1'];
+    const seats = ticket.seatNumbers ? ticket.seatNumbers.split(',').map(s => s.trim()).filter(Boolean) : [ticket.seat || '1'];
+    const totalTickets = allTickets.filter(t => t.admin === admin?.username && (!t.deletedSTAMP || t.deletedSTAMP.trim() === '')).length;
+    const entrance = ticket.sectionNo || ticket.section || '--';
+    const hospitalityArea = ticket.section || '--';
+    const gate = ticket.sectionNo ? ticket.sectionNo.charAt(0) : '--';
+    const suite = ticket.ticketFolderId || ticket.section || '--';
+    const seat = seats[0] || '--';
 
     return (
-        <div className="h-screen flex flex-col bg-white font-sans">
-            {/* ===== LOCKED TOP SECTION (always visible) ===== */}
-            <div className="flex-shrink-0">
+        <div className="min-h-screen bg-[#F5F5F5] flex flex-col">
+            {/* Top bar */}
+            <div className="bg-white px-4 py-3 flex items-center justify-between border-b border-gray-100">
+                <Link
+                    href="/secure/myaccount/tickets"
+                    className="w-10 h-10 flex items-center justify-center text-gray-600"
+                >
+                    <FontAwesomeIcon icon={faChevronLeft} className="text-lg" />
+                </Link>
+                <div className="text-center">
+                    <p className="text-sm font-bold text-gray-800">Ticket {ticketIndex} of {totalTickets || 1}</p>
+                    <div className="flex items-center justify-center space-x-1.5 mt-1">
+                        {Array.from({ length: Math.min(totalTickets || 1, 5) }).map((_, i) => (
+                            <div
+                                key={i}
+                                className={`w-1.5 h-1.5 rounded-full ${i === ticketIndex - 1 ? 'bg-[#002B7F]' : 'bg-gray-300'}`}
+                            />
+                        ))}
+                    </div>
+                </div>
+                <div className="w-10" />
+            </div>
 
-                {/* Hero image — extends behind notch, buttons overlaid */}
-                <div className="relative w-full h-[30vh] bg-black -mt-[env(safe-area-inset-top)]" style={{ minHeight: '180px' }}>
-                    {ticket.coverImage && (
-                        <img
-                            src={ticket.coverImage}
-                            alt={ticket.eventName}
-                            className="w-full h-full object-cover"
-                        />
-                    )}
+            <div className="flex-1 overflow-y-auto px-4 py-6 space-y-6">
+                {/* QR Code Card */}
+                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div className="flex">
+                        <div className="w-2 bg-[#20D4C8] rounded-l-2xl" />
+                        <div className="flex-1 flex flex-col items-center py-8 px-6">
+                            <div className="mb-4 self-start">
+                                <FontAwesomeIcon icon={faUniversalAccess} className="text-gray-400 text-lg" />
+                            </div>
+                            <img
+                                src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(ticket.ticketId)}`}
+                                alt="Ticket QR Code"
+                                className="w-48 h-48 rounded-lg"
+                            />
+                        </div>
+                        <div className="w-2 bg-[#20D4C8] rounded-r-2xl" />
+                    </div>
+                </div>
 
-                    {/* Back + Help overlaid on image */}
-                    <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-4" style={{ paddingTop: 'calc(env(safe-area-inset-top) + 12px)' }}>
-                        <Link
-                            href="/secure/myaccount/tickets"
-                            className="w-10 h-10 bg-black/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white"
+                {/* FIFA Branding */}
+                <div className="text-center">
+                    <p className="text-lg font-black text-[#1F1F1F] tracking-tight leading-none">FIFA</p>
+                    <p className="text-sm font-black text-[#1F1F1F] tracking-tight">WORLD CUP</p>
+                    <p className="text-lg font-black text-[#1F1F1F] tracking-tight">2026</p>
+                </div>
+
+                {/* Match Info */}
+                <div className="text-center space-y-2">
+                    <h2 className="text-xl font-black text-[#1F1F1F]">{ticket.eventName || 'Match'}</h2>
+                    <div className="flex items-center justify-center space-x-2 text-sm text-gray-500">
+                        <FontAwesomeIcon icon={faCalendarAlt} className="text-gray-400" />
+                        <span>{formatDate(ticket.dateTime)}</span>
+                    </div>
+                    <div className="flex items-center justify-center space-x-2 text-sm text-gray-500">
+                        <FontAwesomeIcon icon={faMapMarkerAlt} className="text-gray-400" />
+                        <span>{ticket.venue}{ticket.location ? `, ${ticket.location}` : ''}</span>
+                    </div>
+                </div>
+
+                {/* Entry Details Grid */}
+                <div className="grid grid-cols-3 gap-3">
+                    <div className="border border-gray-200 rounded-xl p-3 text-center">
+                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">ENTRANCE</p>
+                        <p className="text-lg font-black text-[#1F1F1F]">{entrance}</p>
+                    </div>
+                    <div className="border border-gray-200 rounded-xl p-3 text-center">
+                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">HOSPITALITY AREA</p>
+                        <p className="text-sm font-black text-[#1F1F1F]">{hospitalityArea}</p>
+                    </div>
+                    <div className="border border-gray-200 rounded-xl p-3 text-center">
+                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">GATE</p>
+                        <p className="text-lg font-black text-[#1F1F1F]">{gate}</p>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-3 gap-3">
+                    <div className="border border-gray-200 rounded-xl p-3 text-center">
+                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">HOSPITALITY AREA</p>
+                        <p className="text-sm font-black text-[#1F1F1F]">{suite}</p>
+                    </div>
+                    <div className="border border-gray-200 rounded-xl p-3 text-center">
+                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">SUITE</p>
+                        <p className="text-lg font-black text-[#1F1F1F]">{ticket.sectionNo || '--'}</p>
+                    </div>
+                    <div className="border border-gray-200 rounded-xl p-3 text-center">
+                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">ROW</p>
+                        <p className="text-lg font-black text-[#1F1F1F]">{ticket.row || '--'}</p>
+                    </div>
+                </div>
+
+                <div className="flex justify-center">
+                    <div className="border border-gray-200 rounded-xl p-3 text-center w-[33%]">
+                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">SEAT</p>
+                        <p className="text-lg font-black text-[#1F1F1F]">{seat}</p>
+                    </div>
+                </div>
+
+                {/* Dotted Divider */}
+                <div className="border-t border-dotted border-gray-300" />
+
+                {/* Ticket Category */}
+                <div className="flex items-center justify-between px-2">
+                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">TICKET CATEGORY</span>
+                    <span className="text-sm font-bold text-[#1F1F1F]">{ticket.section || 'Standard'}</span>
+                </div>
+            </div>
+
+            {/* FAB */}
+            <div className="fixed bottom-24 right-4 z-[110]">
+                {isFabOpen && (
+                    <div className="mb-3 space-y-2 animate-in slide-in-from-bottom-2 duration-200">
+                        <button
+                            onClick={() => { setIsFabOpen(false); setIsTransferModalOpen(true); }}
+                            className="flex items-center space-x-2 bg-[#B8B4F8] text-white pl-4 pr-6 py-3 rounded-full shadow-lg text-sm font-bold"
                         >
-                            <FontAwesomeIcon icon={faChevronLeft} />
-                        </Link>
-                        <button className="bg-black/30 backdrop-blur-sm rounded-full px-4 py-2 text-white text-xs font-black uppercase tracking-widest">
-                            Help
+                            <span>&#9654;</span>
+                            <span>Send</span>
+                        </button>
+                        <button
+                            onClick={() => { setIsFabOpen(false); alert('Resale/Exchange coming soon'); }}
+                            className="flex items-center space-x-2 bg-[#B8B4F8] text-white pl-4 pr-6 py-3 rounded-full shadow-lg text-sm font-bold"
+                        >
+                            <span>&#8635;</span>
+                            <span>Resale/Exchange</span>
                         </button>
                     </div>
-
-                    {/* Date overlay */}
-                    <div className="absolute bottom-0 left-0 bg-[#1F1F1F] px-4 py-2">
-                        <p className="text-white text-[11px] font-black uppercase tracking-[0.1em]">
-                            {ticket.dateTime || 'FRI • JUL 17, 2026 • 7:30 PM'}
-                        </p>
-                    </div>
-                </div>
-
-                {/* Event info */}
-                <div className="bg-[#1F1F1F] p-6 text-white">
-                    <h1 className="text-[26px] font-black leading-tight uppercase mb-4 tracking-tighter">
-                        {ticket.eventName}
-                    </h1>
-                    <div className="flex justify-between items-end">
-                        <div className="space-y-1">
-                            <p className="text-sm font-bold text-white/60">{ticket.venue}</p>
-                            <p className="text-sm font-bold text-white/60">{ticket.location}</p>
-                        </div>
-                        <div className="flex items-center space-x-2 bg-white/5 px-3 py-1.5 rounded-lg border border-white/10">
-                            <svg className="w-4 h-4 text-white/40" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M0 6a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H2a2 2 0 01-2-2V6z" />
-                                <path d="M14 4h4a2 2 0 012 2v8a2 2 0 01-2 2h-4V4z" />
-                            </svg>
-                            <span className="text-xs font-black">x{seats.length}</span>
-                        </div>
-                    </div>
-                </div>
-
-                {/* View Tickets button */}
-                <div className="px-4 py-4 bg-white">
-                    <button className="w-full bg-[#002B7F] text-white py-3.5 rounded-md font-black text-sm uppercase tracking-widest flex items-center justify-center space-x-4 shadow-xl active:scale-[0.98] transition-all">
-                        <FontAwesomeIcon icon={faBarcode} className="text-lg" />
-                        <span>View Tickets</span>
-                    </button>
-                </div>
-            </div>
-
-            {/* ===== SCROLLABLE BOTTOM SECTION ===== */}
-            <div className="flex-1 overflow-y-auto bg-white px-4">
-                {/* Tabs */}
-                <div className="flex border-b border-gray-100 -mx-4 px-4">
-                    <button
-                        onClick={() => setActiveTab('tickets')}
-                        className={`flex-1 py-4 font-black text-[12px] uppercase tracking-widest border-b-[3px] transition-all ${activeTab === 'tickets' ? 'border-[#002B7F] text-[#002B7F]' : 'border-transparent text-gray-400'}`}
-                    >
-                        Tickets
-                    </button>
-                    <button
-                        onClick={() => setActiveTab('extras')}
-                        className={`flex-1 py-4 font-black text-[12px] uppercase tracking-widest border-b-[3px] transition-all ${activeTab === 'extras' ? 'border-[#002B7F] text-[#002B7F]' : 'border-transparent text-gray-400'}`}
-                    >
-                        Extras
-                    </button>
-                </div>
-
-                {/* Ticket Details List */}
-                {activeTab === 'tickets' && (
-                    <div className="mt-6 space-y-8 animate-in fade-in duration-500 pb-[120px]">
-                        <div className="flex justify-between items-center">
-                            <div>
-                                <h3 className="text-lg font-black text-[#002B7F]">Order #{ticket.ticketId.toUpperCase()}</h3>
-                                <p className="text-xs font-bold text-gray-400 mt-1">{seats.length} Tickets</p>
-                            </div>
-                            <button className="w-10 h-10 flex items-center justify-center text-gray-300">
-                                <FontAwesomeIcon icon={faEllipsisV} />
-                            </button>
-                        </div>
-
-                        <div className="space-y-4">
-                            {seats.map((seatNum, idx) => (
-                                <div key={idx} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                                    <div className="bg-[#F0F2F5] px-6 py-3">
-                                        <p className="text-[10px] font-black text-[#002B7F]/40 uppercase tracking-widest">
-                                            ENGENE Member Presale
-                                        </p>
-                                    </div>
-                                    <div className="p-6 grid grid-cols-3 gap-4">
-                                        <div>
-                                            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Section</p>
-                                            <p className="text-base font-black text-[#002B7F] uppercase">{ticket.section}</p>
-                                        </div>
-                                        <div>
-                                            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Row</p>
-                                            <p className="text-base font-black text-[#002B7F] uppercase">{ticket.row}</p>
-                                        </div>
-                                        <div>
-                                            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Seat</p>
-                                            <p className="text-base font-black text-[#002B7F] uppercase">{seatNum}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* More Options / Map Section */}
-                        <div className="pt-12 space-y-8">
-                            <h4 className="text-lg font-black text-[#002B7F] uppercase tracking-tight">More Options</h4>
-
-                            {/* Venue Map Card */}
-                            <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
-                                <div className="relative aspect-video bg-gray-200">
-                                    <iframe
-                                        title="Venue Map"
-                                        loading="lazy"
-                                        className="w-full h-full absolute inset-0"
-                                        src={`https://www.google.com/maps?q=${encodeURIComponent(ticket.venue + ' ' + ticket.location)}&output=embed`}
-                                    />
-                                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow">
-                                        <h5 className="text-sm font-black text-[#1F1F1F]">{ticket.venue}</h5>
-                                    </div>
-                                </div>
-                                <a
-                                    href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(ticket.venue + ' ' + ticket.location)}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="block w-full bg-[#F0F2F5] py-4 text-sm font-black text-[#002B7F] uppercase tracking-widest hover:bg-gray-200 transition-colors text-center"
-                                >
-                                    Get Directions
-                                </a>
-                            </div>
-
-                            {/* Social Share Card */}
-                            <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
-                                <div className="relative aspect-[2/1]">
-                                    <img src={ticket.coverImage} alt="Event" className="w-full h-full object-cover opacity-80" />
-                                    <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent flex items-center px-8">
-                                        <div className="max-w-[180px]">
-                                            <h5 className="text-2xl font-black text-[#002B7F] leading-tight">YOU GOT TICKETS!</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="p-6">
-                                    <h6 className="text-lg font-black text-[#002B7F]">Post on Social Media</h6>
-                                    <p className="text-sm font-bold text-gray-400 mt-2">Build hype for the event, and share that you got tickets with your friends and family</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 )}
-            </div>
-
-            {/* Floating Action Pill */}
-            <div className="fixed bottom-[40px] left-1/2 -translate-x-1/2 flex items-center bg-white shadow-[0_12px_40px_rgba(0,0,0,0.25)] rounded-full border border-gray-100 p-1.5 z-[110] min-w-[280px]" style={{ marginBottom: 'env(safe-area-inset-bottom, 0px)' }}>
                 <button
-                    onClick={() => setIsTransferModalOpen(true)}
-                    className="flex-1 flex flex-col items-center justify-center py-2 px-6 text-[#002B7F] active:opacity-50 transition-all border-r border-gray-100"
+                    onClick={() => setIsFabOpen(!isFabOpen)}
+                    className="w-14 h-14 bg-[#B8B4F8] rounded-full flex items-center justify-center shadow-xl text-white text-xl"
                 >
-                    <FontAwesomeIcon icon={faShareAlt} className="text-xl mb-1 rotate-[-45deg]" />
-                    <span className="text-[10px] font-black uppercase tracking-widest">Transfer</span>
-                </button>
-                <button
-                    onClick={() => window.open('https://www.fifa.com/en/tickets', '_blank')}
-                    className="flex-1 flex flex-col items-center justify-center py-2 px-6 text-gray-300 active:opacity-50 transition-all"
-                >
-                    <div className="w-6 h-6 border-2 border-gray-200 rounded-full flex items-center justify-center mb-1">
-                        <div className="w-1.5 h-1.5 bg-gray-200 rounded-full"></div>
-                    </div>
-                    <span className="text-[10px] font-black uppercase tracking-widest">Sell</span>
+                    {isFabOpen ? '×' : '+'}
                 </button>
             </div>
 
-            {/* Transfer Modal */}
             <TransferModal
                 isOpen={isTransferModalOpen}
                 onClose={() => setIsTransferModalOpen(false)}

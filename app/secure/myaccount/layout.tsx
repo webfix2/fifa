@@ -84,20 +84,19 @@ export default function MyAccountLayout({
     const isManage = pathname.endsWith('/manage');
 
     return (
-        <div className="min-h-screen bg-black flex flex-col font-sans">
-            {/* Shared Mobile Header - FIXED for app-like feel */}
+        <div className="min-h-screen bg-[#F5F5F5] flex flex-col font-sans">
             {!isDetailView && (
-                <header className="bg-[#1F1F1F] text-white px-4 h-[72px] fixed top-0 left-0 right-0 z-50 flex items-center justify-between border-b border-white/5 shadow-xl">
+                <header className="bg-white text-[#1F1F1F] px-4 h-[72px] fixed top-0 left-0 right-0 z-50 flex items-center justify-between border-b border-gray-100 shadow-sm">
                     <div className="w-12">
                         {pathParts.length > 3 && !isTicketsList && !isTransfers && !isManage && (
-                            <button onClick={() => router.back()} className="text-white hover:text-white/80 transition-colors">
+                            <button onClick={() => router.back()} className="text-gray-600 hover:text-[#1F1F1F] transition-colors">
                                 <FontAwesomeIcon icon={faChevronLeft} />
                             </button>
                         )}
                     </div>
                     
                     <div className="flex items-center space-x-2">
-                        <h1 className="text-base font-bold text-white">
+                        <h1 className="text-base font-bold text-[#1F1F1F]">
                             {isTicketsList ? 'My Events' : isTransfers ? 'Transfers' : 'My Account'}
                         </h1>
                         {isTicketsList && flagUrl && (
@@ -107,11 +106,11 @@ export default function MyAccountLayout({
 
                     <div className="w-12 flex justify-end">
                         {(isTicketsList || isTransfers) ? (
-                            <button className="text-sm font-bold text-white/80">Help</button>
+                            <button className="text-sm font-bold text-gray-500">Help</button>
                         ) : isManage ? (
                             <div className="w-10"></div>
                         ) : (
-                            <button onClick={() => router.push('/secure/myaccount/manage')} className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center text-white">
+                            <button onClick={() => router.push('/secure/myaccount/manage')} className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-gray-600">
                                 <FontAwesomeIcon icon={faUser} className="text-sm" />
                             </button>
                         )}

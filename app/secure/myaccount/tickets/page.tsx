@@ -5,12 +5,26 @@ import { useRouter } from 'next/navigation';
 import { useUser } from '../../../UserContext';
 import { Ticket } from '../../../types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-    faTicketAlt, 
-    faSearch,
-    faChevronRight
-} from '@fortawesome/free-solid-svg-icons';
+import { faTicketAlt, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
+
+function parseDateTime(dt: string): { day: string; month: string; year: string; time: string } {
+    if (!dt) return { day: '--', month: '--', year: '--', time: '--:--' };
+    try {
+        const d = new Date(dt);
+        if (isNaN(d.getTime())) {
+            const parts = dt.split(/[\s,]+/);
+            return { day: parts[0] || '--', month: parts[1] || '--', year: parts[2] || '--', time: parts[3] || '--:--' };
+        }
+        const day = d.getDate().toString();
+        const month = d.toLocaleString('en-US', { month: 'short' }).toUpperCase();
+        const year = d.getFullYear().toString().slice(-2);
+        const time = d.toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+        return { day, month, year, time };
+    } catch {
+        return { day: '--', month: '--', year: '--', time: '--:--' };
+    }
+}
 
 export default function MyTicketsPage() {
     const router = useRouter();
@@ -19,8 +33,6 @@ export default function MyTicketsPage() {
         tickets: allTickets,
         fetchAllTickets,
         setAdmin,
-        setUsers,
-        setTickets,
         setLoggedInAdmin,
     } = useUser();
 
@@ -54,7 +66,6 @@ export default function MyTicketsPage() {
         }
     }, [setAdmin, router, fetchAllTickets, setLoggedInAdmin]);
 
-
     useEffect(() => {
         if (isSessionValid === true && localAdmin && Array.isArray(allTickets)) {
             const filtered = allTickets.filter((t) => {
@@ -74,84 +85,102 @@ export default function MyTicketsPage() {
 
     if (isSessionValid === null) return null;
 
+    const upcomingCount = allTickets?.filter((t) => {
+        const matchesAdmin = t.admin === localAdmin;
+        const isNotDeleted = !t.deletedSTAMP || t.deletedSTAMP.trim() === "";
+        return matchesAdmin && isNotDeleted && (t.eventStatus === 'ACTIVE' || t.eventStatus === 'WAITING');
+    }).length ?? 0;
+
     return (
-        <div className="flex-1 flex flex-col bg-white min-h-full pb-[100px]">
-            {/* Tabs */}
-            <div className="flex bg-[#1F1F1F] border-b border-white/5 sticky top-[72px] z-40">
+        <div className="flex-1 flex flex-col min-h-full pb-[100px]">
+            <div className="px-6 pt-6 pb-2">
+                <h1 className="text-3xl font-black text-[#1F1F1F] tracking-tight">My tickets</h1>
+            </div>
+
+            <div className="flex px-6 pt-4 pb-0 border-b border-gray-100">
                 <button
                     onClick={() => setActiveTab('upcoming')}
-                    className={`flex-1 py-4 font-black text-[12px] uppercase tracking-[0.1em] transition-all border-b-[3px] whitespace-nowrap ${activeTab === 'upcoming' ? 'border-white text-white' : 'border-transparent text-white/40'}`}
+                    className={`flex items-center space-x-2 pb-3 font-bold text-sm transition-all border-b-2 whitespace-nowrap ${activeTab === 'upcoming' ? 'border-[#002B7F] text-[#1F1F1F]' : 'border-transparent text-gray-400'}`}
                 >
-                    Upcoming ({activeTab === 'upcoming' ? filteredTickets.length : '?'})
+                    <span>Upcoming events</span>
+                    <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-black ${activeTab === 'upcoming' ? 'bg-[#1F1F1F] text-white' : 'bg-gray-200 text-gray-500'}`}>
+                        {activeTab === 'upcoming' ? filteredTickets.length : upcomingCount}
+                    </span>
                 </button>
                 <button
                     onClick={() => setActiveTab('past')}
-                    className={`flex-1 py-4 font-black text-[12px] uppercase tracking-[0.1em] transition-all border-b-[3px] whitespace-nowrap ${activeTab === 'past' ? 'border-white text-white' : 'border-transparent text-white/40'}`}
+                    className={`flex items-center space-x-2 pb-3 ml-6 font-bold text-sm transition-all border-b-2 whitespace-nowrap ${activeTab === 'past' ? 'border-[#002B7F] text-[#1F1F1F]' : 'border-transparent text-gray-400'}`}
                 >
-                    Past (0)
+                    <span>Past events</span>
                 </button>
             </div>
 
-            {/* Ticket List */}
-            <div className="flex-1 overflow-y-auto bg-gray-100 p-4 space-y-4">
+            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
                 {filteredTickets.length > 0 ? (
-                    filteredTickets.map((ticket, i) => (
-                        <Link 
-                            key={i}
-                            href={`/secure/myaccount/tickets/${ticket.ticketId}`}
-                            className="block bg-white rounded-none overflow-hidden shadow-md active:scale-[0.98] transition-all cursor-pointer"
-                        >
-                            {/* Hero Image Section */}
-                            <div className="relative w-full aspect-[16/10] bg-black">
-                                {ticket.coverImage && (
-                                    <img 
-                                        src={ticket.coverImage} 
-                                        alt={ticket.eventName} 
-                                        className="w-full h-full object-cover"
-                                    />
-                                )}
-                                {/* Hero Overlay - Black Bar for Date */}
-                                <div className="absolute bottom-0 left-0 bg-[#1F1F1F] px-4 py-2">
-                                    <p className="text-white text-[11px] font-black uppercase tracking-[0.1em]">
-                                        {ticket.dateTime || 'FRI • JUL 17, 2026 • 7:30 PM'}
-                                    </p>
-                                </div>
-                            </div>
+                    filteredTickets.map((ticket, i) => {
+                        const { day, month, year, time } = parseDateTime(ticket.dateTime);
+                        const seatCount = ticket.seatNumbers ? ticket.seatNumbers.split(',').filter(s => s.trim()).length : 1;
 
-                            {/* Info Section */}
-                            <div className="bg-[#1F1F1F] p-5 text-white">
-                                <h2 className="text-2xl font-black leading-tight uppercase mb-3 tracking-tighter border-b-2 border-white/20 pb-2 inline-block">
-                                    {ticket.eventName}
-                                </h2>
-                                <div className="flex justify-between items-end mt-2">
-                                    <div className="space-y-1">
-                                        <p className="text-sm font-bold text-white/60">{ticket.venue}</p>
-                                        <p className="text-sm font-bold text-white/60">{ticket.location}</p>
+                        return (
+                            <Link
+                                key={i}
+                                href={`/secure/myaccount/tickets/${ticket.ticketId}`}
+                                className="block bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 active:scale-[0.98] transition-all"
+                            >
+                                <div className="flex">
+                                    <div className="w-[65%] relative min-h-[120px] bg-gray-100">
+                                        {ticket.coverImage ? (
+                                            <img
+                                                src={ticket.coverImage}
+                                                alt={ticket.eventName}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        ) : (
+                                            <div className="w-full h-full flex items-center justify-center">
+                                                <FontAwesomeIcon icon={faTicketAlt} className="text-3xl text-gray-300" />
+                                            </div>
+                                        )}
                                     </div>
-                                    <div className="flex items-center space-x-2 bg-white/5 px-3 py-1.5 rounded-lg border border-white/10">
-                                        <svg className="w-4 h-4 text-white/40" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M0 6a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H2a2 2 0 01-2-2V6z" />
-                                            <path d="M14 4h4a2 2 0 012 2v8a2 2 0 01-2 2h-4V4z" />
-                                        </svg>
-                                        <span className="text-xs font-black">x{ticket.seatNumbers?.split(',').length || 1}</span>
+                                    <div className="w-[35%] flex flex-col items-center justify-center px-2 py-4 space-y-0.5">
+                                        <span className="text-3xl font-black text-[#1F1F1F] leading-none">{day}</span>
+                                        <span className="text-[11px] font-bold text-gray-500 uppercase">{month}</span>
+                                        <span className="text-sm font-bold text-[#1F1F1F]">{year}</span>
+                                        <span className="text-[10px] text-gray-400 font-medium">{time}</span>
                                     </div>
                                 </div>
-                            </div>
-                        </Link>
-                    ))
+                                <div className="px-4 py-3 flex justify-between items-center">
+                                    <div className="flex-1 min-w-0 mr-3">
+                                        <p className="font-bold text-[#1F1F1F] text-[15px] truncate">{ticket.eventName || 'Event'}</p>
+                                        <p className="text-xs text-gray-400 truncate">{ticket.venue || 'Venue'}</p>
+                                    </div>
+                                    <div className="flex items-center space-x-2 text-gray-300 shrink-0">
+                                        <span className="text-xs font-bold text-gray-400">{seatCount}</span>
+                                        <FontAwesomeIcon icon={faTicketAlt} className="text-sm" />
+                                        <FontAwesomeIcon icon={faChevronRight} className="text-xs" />
+                                    </div>
+                                </div>
+                            </Link>
+                        );
+                    })
                 ) : (
                     <div className="py-20 text-center">
-                        <div className="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <FontAwesomeIcon icon={faTicketAlt} className="text-3xl text-gray-400" />
+                        <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <FontAwesomeIcon icon={faTicketAlt} className="text-3xl text-gray-300" />
                         </div>
-                        <h3 className="text-xl font-black text-[#1F1F1F] mb-2">No upcoming purchases</h3>
-                        <p className="text-gray-400 font-bold mb-8 px-10">Find your next live experience today!</p>
-                        <button 
-                            onClick={() => router.push('/')}
-                            className="bg-[#002B7F] text-white px-10 py-3 rounded-md font-black text-xs uppercase tracking-widest shadow-lg"
-                        >
-                            Browse Events
-                        </button>
+                        <h3 className="text-xl font-black text-[#1F1F1F] mb-2">
+                            {activeTab === 'upcoming' ? 'No upcoming purchases' : 'No past events'}
+                        </h3>
+                        <p className="text-gray-400 font-bold mb-8 px-10">
+                            {activeTab === 'upcoming' ? 'Find your next live experience today!' : 'Your past events will appear here.'}
+                        </p>
+                        {activeTab === 'upcoming' && (
+                            <button
+                                onClick={() => router.push('/')}
+                                className="bg-[#002B7F] text-white px-10 py-3 rounded-xl font-black text-xs uppercase tracking-widest shadow-lg"
+                            >
+                                Browse Events
+                            </button>
+                        )}
                     </div>
                 )}
             </div>
