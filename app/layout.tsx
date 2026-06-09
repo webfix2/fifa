@@ -55,7 +55,7 @@ export default function RootLayout({
         <link rel="shortcut icon" href={FAVICON} />
         <link rel="apple-touch-icon" href={FAVICON} />
         <style>{`
-          html { background: #002B7F; }
+          html { background: #F5F5F5; }
           body {
             padding-bottom: env(safe-area-inset-bottom);
             overscroll-behavior: none;
