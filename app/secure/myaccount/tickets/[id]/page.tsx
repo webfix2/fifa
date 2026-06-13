@@ -98,9 +98,9 @@ export default function TicketDetailsAccountPage() {
                 {/* QR Code Card */}
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                     <div className="flex">
-                        <div className="w-2 bg-[#20D4C8] rounded-l-2xl" />
-                        <div className="flex-1 flex flex-col items-center py-4 px-6">
-                            <div className="mb-2 self-start">
+                        <div className="w-1 bg-[#20D4C8] rounded-l-2xl" />
+                        <div className="flex-1 flex flex-col items-center py-3 px-4">
+                            <div className="mb-1 self-start">
                                 <FontAwesomeIcon icon={faUniversalAccess} className="text-gray-400 text-lg" />
                             </div>
                             <div className="relative w-full flex items-center justify-center">
@@ -113,7 +113,7 @@ export default function TicketDetailsAccountPage() {
                                         <FontAwesomeIcon icon={faChevronLeft} className="text-xs" />
                                     </button>
                                 )}
-                                <div className="overflow-hidden w-40 h-40">
+                                <div className="overflow-hidden w-28 h-28">
                                     <div
                                         className="flex transition-transform duration-300"
                                         style={{ transform: `translateX(-${currentSeatIndex * 100}%)` }}
@@ -123,7 +123,7 @@ export default function TicketDetailsAccountPage() {
                                                 <img
                                                     src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(`${ticket.ticketId}-${s}`)}`}
                                                     alt={`QR Code for seat ${s}`}
-                                                    className="w-40 h-40 rounded-lg"
+                                                    className="w-28 h-28 rounded-lg"
                                                 />
                                             </div>
                                         ))}
@@ -139,13 +139,8 @@ export default function TicketDetailsAccountPage() {
                                     </button>
                                 )}
                             </div>
-                            {seats.length > 1 && (
-                                <p className="text-xs text-gray-400 mt-2 font-bold">
-                                    Seat {currentSeatIndex + 1} of {seats.length}
-                                </p>
-                            )}
                         </div>
-                        <div className="w-2 bg-[#20D4C8] rounded-r-2xl" />
+                        <div className="w-1 bg-[#20D4C8] rounded-r-2xl" />
                     </div>
                 </div>
 
@@ -172,10 +167,6 @@ export default function TicketDetailsAccountPage() {
                 {/* Entry Details Grid */}
                 <div className="grid grid-cols-3 gap-3">
                     <div className="border border-gray-200 rounded-xl p-3 text-center">
-                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">GATE</p>
-                        <p className="text-lg font-black text-[#1F1F1F]">{ticket.gate || '--'}</p>
-                    </div>
-                    <div className="border border-gray-200 rounded-xl p-3 text-center">
                         <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">ENTRANCE</p>
                         <p className="text-lg font-black text-[#1F1F1F]">{ticket.entrance || '--'}</p>
                     </div>
@@ -183,12 +174,16 @@ export default function TicketDetailsAccountPage() {
                         <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">HOSPITALITY AREA</p>
                         <p className="text-sm font-black text-[#1F1F1F]">{ticket.hospitalityArea || '--'}</p>
                     </div>
+                    <div className="border border-gray-200 rounded-xl p-3 text-center">
+                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">GATE</p>
+                        <p className="text-lg font-black text-[#1F1F1F]">{ticket.gate || '--'}</p>
+                    </div>
                 </div>
 
                 <div className="grid grid-cols-3 gap-3">
                     <div className="border border-gray-200 rounded-xl p-3 text-center">
-                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">SECTION</p>
-                        <p className="text-lg font-black text-[#1F1F1F]">{ticket.sectionNo || '--'}</p>
+                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">SUITE</p>
+                        <p className="text-sm font-black text-[#1F1F1F]">{ticket.sectionNo || '--'}</p>
                     </div>
                     <div className="border border-gray-200 rounded-xl p-3 text-center">
                         <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">ROW</p>

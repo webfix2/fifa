@@ -15,6 +15,9 @@ interface NewUserFormData {
   senderEmail: string;
   userPlatform: string;
   sendType: string;
+  gate: string;
+  entrance: string;
+  hospitalityArea: string;
 }
 
 interface UserTableProps {
@@ -36,6 +39,9 @@ const UserTable: React.FC<UserTableProps> = ({ users, tickets }) => {
     senderEmail: '',
     userPlatform: 'fifa',
     sendType: 'draft',
+    gate: '',
+    entrance: '',
+    hospitalityArea: '',
   });
   const [isActionLoading, setIsActionLoading] = useState(false);
 
