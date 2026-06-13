@@ -5,7 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { useUser } from '../../../../UserContext';
 import { Ticket } from '../../../../types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faCalendarAlt, faMapMarkerAlt, faUniversalAccess } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faCalendarAlt, faMapMarkerAlt, faUniversalAccess, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import TransferModal from '../../../../components/TransferModal';
 
@@ -43,7 +43,7 @@ export default function TicketDetailsAccountPage() {
     const [isSessionValid, setIsSessionValid] = useState<boolean | null>(null);
     const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
     const [isFabOpen, setIsFabOpen] = useState(false);
-    const [ticketIndex, setTicketIndex] = useState(1);
+    const [currentSeatIndex, setCurrentSeatIndex] = useState(0);
 
     useEffect(() => {
         const adminToken = localStorage.getItem("adminToken");
@@ -72,8 +72,6 @@ export default function TicketDetailsAccountPage() {
             const foundTicket = allTickets.find(t => t.ticketId === ticketId || t.sn === ticketId);
             if (foundTicket) {
                 setTicket(foundTicket);
-                const idx = allTickets.findIndex(t => t.ticketId === ticketId || t.sn === ticketId);
-                setTicketIndex(idx >= 0 ? idx + 1 : 1);
             }
         }
     }, [allTickets, ticketId, isSessionValid]);
@@ -81,12 +79,7 @@ export default function TicketDetailsAccountPage() {
     if (isSessionValid === null || !ticket) return null;
 
     const seats = ticket.seatNumbers ? ticket.seatNumbers.split(',').map(s => s.trim()).filter(Boolean) : [ticket.seat || '1'];
-    const totalTickets = allTickets.filter(t => t.admin === admin?.username && (!t.deletedSTAMP || t.deletedSTAMP.trim() === '')).length;
-    const entrance = ticket.sectionNo || ticket.section || '--';
-    const hospitalityArea = ticket.section || '--';
-    const gate = ticket.sectionNo ? ticket.sectionNo.charAt(0) : '--';
-    const suite = ticket.ticketFolderId || ticket.section || '--';
-    const seat = seats[0] || '--';
+    const seat = seats[currentSeatIndex] || seats[0] || '--';
 
     return (
         <div className="min-h-screen bg-[#F5F5F5] flex flex-col pt-[env(safe-area-inset-top)]">
@@ -98,16 +91,6 @@ export default function TicketDetailsAccountPage() {
                 >
                     <FontAwesomeIcon icon={faChevronLeft} className="text-lg" />
                 </Link>
-                <div className="text-center">
-                    <div className="flex items-center justify-center space-x-1.5">
-                        {Array.from({ length: Math.min(totalTickets || 1, 5) }).map((_, i) => (
-                            <div
-                                key={i}
-                                className={`w-1.5 h-1.5 rounded-full ${i === ticketIndex - 1 ? 'bg-[#002B7F]' : 'bg-gray-300'}`}
-                            />
-                        ))}
-                    </div>
-                </div>
                 <div className="w-10" />
             </div>
 
@@ -116,15 +99,51 @@ export default function TicketDetailsAccountPage() {
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                     <div className="flex">
                         <div className="w-2 bg-[#20D4C8] rounded-l-2xl" />
-                        <div className="flex-1 flex flex-col items-center py-8 px-6">
-                            <div className="mb-4 self-start">
+                        <div className="flex-1 flex flex-col items-center py-4 px-6">
+                            <div className="mb-2 self-start">
                                 <FontAwesomeIcon icon={faUniversalAccess} className="text-gray-400 text-lg" />
                             </div>
-                            <img
-                                src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(ticket.ticketId)}`}
-                                alt="Ticket QR Code"
-                                className="w-48 h-48 rounded-lg"
-                            />
+                            <div className="relative w-full flex items-center justify-center">
+                                {seats.length > 1 && (
+                                    <button
+                                        onClick={() => setCurrentSeatIndex(i => Math.max(0, i - 1))}
+                                        className={`absolute left-0 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center ${currentSeatIndex === 0 ? 'opacity-30' : 'text-[#002B7F]'}`}
+                                        disabled={currentSeatIndex === 0}
+                                    >
+                                        <FontAwesomeIcon icon={faChevronLeft} className="text-xs" />
+                                    </button>
+                                )}
+                                <div className="overflow-hidden w-40 h-40">
+                                    <div
+                                        className="flex transition-transform duration-300"
+                                        style={{ transform: `translateX(-${currentSeatIndex * 100}%)` }}
+                                    >
+                                        {seats.map((s, i) => (
+                                            <div key={i} className="min-w-full flex items-center justify-center">
+                                                <img
+                                                    src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(`${ticket.ticketId}-${s}`)}`}
+                                                    alt={`QR Code for seat ${s}`}
+                                                    className="w-40 h-40 rounded-lg"
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                {seats.length > 1 && (
+                                    <button
+                                        onClick={() => setCurrentSeatIndex(i => Math.min(seats.length - 1, i + 1))}
+                                        className={`absolute right-0 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center ${currentSeatIndex === seats.length - 1 ? 'opacity-30' : 'text-[#002B7F]'}`}
+                                        disabled={currentSeatIndex === seats.length - 1}
+                                    >
+                                        <FontAwesomeIcon icon={faChevronRight} className="text-xs" />
+                                    </button>
+                                )}
+                            </div>
+                            {seats.length > 1 && (
+                                <p className="text-xs text-gray-400 mt-2 font-bold">
+                                    Seat {currentSeatIndex + 1} of {seats.length}
+                                </p>
+                            )}
                         </div>
                         <div className="w-2 bg-[#20D4C8] rounded-r-2xl" />
                     </div>
@@ -153,23 +172,23 @@ export default function TicketDetailsAccountPage() {
                 {/* Entry Details Grid */}
                 <div className="grid grid-cols-3 gap-3">
                     <div className="border border-gray-200 rounded-xl p-3 text-center">
+                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">GATE</p>
+                        <p className="text-lg font-black text-[#1F1F1F]">{ticket.gate || '--'}</p>
+                    </div>
+                    <div className="border border-gray-200 rounded-xl p-3 text-center">
                         <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">ENTRANCE</p>
-                        <p className="text-lg font-black text-[#1F1F1F]">{entrance}</p>
+                        <p className="text-lg font-black text-[#1F1F1F]">{ticket.entrance || '--'}</p>
                     </div>
                     <div className="border border-gray-200 rounded-xl p-3 text-center">
                         <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">HOSPITALITY AREA</p>
-                        <p className="text-sm font-black text-[#1F1F1F]">{hospitalityArea}</p>
-                    </div>
-                    <div className="border border-gray-200 rounded-xl p-3 text-center">
-                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">GATE</p>
-                        <p className="text-lg font-black text-[#1F1F1F]">{gate}</p>
+                        <p className="text-sm font-black text-[#1F1F1F]">{ticket.hospitalityArea || '--'}</p>
                     </div>
                 </div>
 
                 <div className="grid grid-cols-3 gap-3">
                     <div className="border border-gray-200 rounded-xl p-3 text-center">
-                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">SUITE</p>
-                        <p className="text-sm font-black text-[#1F1F1F]">{suite}</p>
+                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">SECTION</p>
+                        <p className="text-lg font-black text-[#1F1F1F]">{ticket.sectionNo || '--'}</p>
                     </div>
                     <div className="border border-gray-200 rounded-xl p-3 text-center">
                         <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">ROW</p>
