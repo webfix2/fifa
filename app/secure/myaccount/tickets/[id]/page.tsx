@@ -86,32 +86,32 @@ export default function TicketDetailsAccountPage() {
     return (
         <div className="min-h-screen bg-[#F5F5F5] flex flex-col pt-[env(safe-area-inset-top)]">
             {/* Header with seat navigation */}
-            <header className="bg-[#001C4B] text-white px-4 py-2 fixed top-0 left-0 right-0 z-50 pt-[env(safe-area-inset-top)]">
+            <header className="bg-white text-[#1F1F1F] px-4 py-2 fixed top-0 left-0 right-0 z-50 border-b border-gray-100 pt-[env(safe-area-inset-top)]">
                 <div className="flex items-center justify-between">
                     {currentSeatIndex > 0 ? (
-                        <button onClick={prevSeat} className="w-8 h-8 flex items-center justify-center rounded-full text-white/80 hover:bg-white/10 transition-all">
-                            <FontAwesomeIcon icon={faChevronLeft} className="text-lg" />
+                        <button onClick={prevSeat} className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-all">
+                            <FontAwesomeIcon icon={faChevronLeft} className="text-lg text-gray-600" />
                         </button>
                     ) : (
-                        <Link href="/secure/myaccount/tickets" className="w-8 h-8 flex items-center justify-center rounded-full text-white/80 hover:bg-white/10 transition-all">
-                            <FontAwesomeIcon icon={faChevronLeft} className="text-lg" />
+                        <Link href="/secure/myaccount/tickets" className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-all">
+                            <FontAwesomeIcon icon={faChevronLeft} className="text-lg text-gray-600" />
                         </Link>
                     )}
                     <div className="text-center select-none">
-                        <p className="text-[14px] font-black text-white tracking-wide">
+                        <p className="text-[14px] font-black text-[#1F1F1F] tracking-wide">
                             Ticket {currentSeatIndex + 1}{seats.length > 1 ? ` of ${seats.length}` : ''}
                         </p>
                         {seats.length > 1 && (
                             <div className="flex justify-center space-x-1 mt-0.5">
                                 {seats.map((_: string, idx: number) => (
-                                    <div key={idx} className={`rounded-full transition-all duration-300 ${currentSeatIndex === idx ? 'w-3 h-1.5 bg-white' : 'w-1.5 h-1.5 bg-white/30'}`} />
+                                    <div key={idx} className={`rounded-full transition-all duration-300 ${currentSeatIndex === idx ? 'w-3 h-1.5 bg-[#002B7F]' : 'w-1.5 h-1.5 bg-gray-300'}`} />
                                 ))}
                             </div>
                         )}
                     </div>
                     {seats.length > 1 ? (
-                        <button onClick={nextSeat} disabled={currentSeatIndex === seats.length - 1} className="w-8 h-8 flex items-center justify-center rounded-full text-white/70 disabled:opacity-20 hover:bg-white/10 transition-all">
-                            <FontAwesomeIcon icon={faChevronRight} className="text-sm" />
+                        <button onClick={nextSeat} disabled={currentSeatIndex === seats.length - 1} className="w-8 h-8 flex items-center justify-center rounded-full disabled:opacity-30 hover:bg-gray-100 transition-all">
+                            <FontAwesomeIcon icon={faChevronRight} className="text-sm text-gray-600" />
                         </button>
                     ) : (
                         <div className="w-8" />

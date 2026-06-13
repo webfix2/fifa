@@ -130,7 +130,7 @@ export default function TransferModal({ isOpen, onClose, ticket }: TransferModal
     return (
         <div className={`fixed inset-0 z-[200] flex flex-col bg-white transition-all duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
 
-            <div className="flex justify-end px-4 pt-4 pb-0">
+            <div className="flex justify-end px-4 pt-[env(safe-area-inset-top)] pt-4 pb-0">
                 <button onClick={onClose} className="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700 bg-gray-100 rounded-full">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -209,7 +209,7 @@ export default function TransferModal({ isOpen, onClose, ticket }: TransferModal
                                             value={formData.recipient}
                                             onChange={(e) => setFormData({...formData, recipient: e.target.value})}
                                         />
-                                        <div className="flex space-x-2">
+                                        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                                             <input
                                                 type="text"
                                                 placeholder="First name"
