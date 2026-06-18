@@ -241,9 +241,11 @@ export default function TicketDetailsAccountPage() {
                 )}
                 <button
                     onClick={() => setIsFabOpen(!isFabOpen)}
-                    className="w-14 h-14 bg-[#B8B4F8] rounded-full flex items-center justify-center shadow-xl text-white text-xl"
+                    className="w-12 h-12 bg-[#1F1F1F] rounded-full flex flex-col items-center justify-center shadow-xl gap-[3px]"
                 >
-                    {isFabOpen ? '×' : '+'}
+                    <span className="w-[4px] h-[4px] bg-white rounded-full"></span>
+                    <span className="w-[4px] h-[4px] bg-white rounded-full"></span>
+                    <span className="w-[4px] h-[4px] bg-white rounded-full"></span>
                 </button>
             </div>
 
