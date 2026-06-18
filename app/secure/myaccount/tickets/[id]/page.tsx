@@ -144,37 +144,17 @@ export default function TicketDetailsAccountPage() {
                     </div>
 
                     {/* QR Code and Badge Body */}
-                    <div className="relative flex flex-col items-center py-8 px-6">
+                    <div className="relative flex flex-col items-center py-6 px-6">
                         {/* Seat Number / Index - top right */}
                         <div className="absolute top-4 right-6 select-none">
                             <p className="text-[#1F1F1F]/30 text-3xl font-black tracking-tighter">{seat}</p>
                         </div>
 
                         {/* FIFA Badge */}
-                        <div className="bg-[#1F1F1F] rounded-2xl px-6 py-4 mb-6 text-center select-none w-[130px] shadow-sm">
+                        <div className="bg-[#1F1F1F] rounded-2xl px-6 py-4 mb-2 text-center select-none w-[130px] shadow-sm">
                             <p className="text-white text-[11px] font-black tracking-widest leading-none">FIFA</p>
                             <p className="text-white text-[9px] font-black tracking-widest mt-1.5 leading-none">WORLD CUP</p>
                             <p className="text-white text-[11px] font-black tracking-widest mt-1.5 leading-none">2026™</p>
-                        </div>
-
-                        {/* QR Code */}
-                        <div className="bg-white rounded-2xl p-3 shadow-inner border border-gray-100 overflow-hidden">
-                            <div className="overflow-hidden w-28 h-28">
-                                <div
-                                    className="flex transition-transform duration-300"
-                                    style={{ transform: `translateX(-${currentSeatIndex * 100}%)` }}
-                                >
-                                    {seats.map((s, i) => (
-                                        <div key={i} className="min-w-full flex items-center justify-center">
-                                            <img
-                                                src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(`${ticket.ticketId}-${s}`)}`}
-                                                alt={`QR Code for seat ${s}`}
-                                                className="w-28 h-28 select-none"
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
