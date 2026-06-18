@@ -123,7 +123,11 @@ export default function TicketDetailsAccountPage() {
                 {/* Combined Ticket Status & QR Card */}
                 <div className="bg-[#faf5f7] rounded-3xl shadow-sm overflow-hidden border border-gray-100">
                     {/* Watermarked Info Banner */}
-                    <div className="relative bg-white border-l-[8px] border-r-[8px] border-[#026CDF] px-4 py-4 flex flex-col items-center justify-center min-h-[90px] overflow-hidden border-b border-gray-100">
+                    <div className="relative bg-white px-4 py-4 flex flex-col items-center justify-center min-h-[90px] overflow-hidden border-b border-gray-100">
+                        {/* Solid blue vertical bars on left and right sides matching references */}
+                        <div className="absolute left-0 top-0 bottom-0 w-[12px] bg-[#026CDF] z-20" />
+                        <div className="absolute right-0 top-0 bottom-0 w-[12px] bg-[#026CDF] z-20" />
+
                         {/* Faded QR code watermark in background */}
                         <div className="absolute inset-0 flex items-center justify-center opacity-[0.08] pointer-events-none select-none">
                             <img
@@ -133,7 +137,7 @@ export default function TicketDetailsAccountPage() {
                             />
                         </div>
                         {/* Info Icon in top-right */}
-                        <div className="absolute top-3.5 right-3.5 text-[#026CDF] text-[10px] font-black w-4 h-4 border-[1.5px] border-[#026CDF] rounded-full flex items-center justify-center select-none">
+                        <div className="absolute top-3 right-6 text-[#026CDF] text-[10px] font-black w-4 h-4 border-[1.5px] border-[#026CDF] rounded-full flex items-center justify-center select-none">
                             i
                         </div>
                         {/* Text Content */}
@@ -143,18 +147,18 @@ export default function TicketDetailsAccountPage() {
                         </div>
                     </div>
 
-                    {/* QR Code and Badge Body */}
+                    {/* Badge Body */}
                     <div className="relative flex flex-col items-center py-6 px-6">
-                        {/* Seat Number / Index - top right */}
-                        <div className="absolute top-4 right-6 select-none">
-                            <p className="text-[#1F1F1F]/30 text-3xl font-black tracking-tighter">{seat}</p>
+                        {/* Seat Number / Index - top right small circular badge */}
+                        <div className="absolute top-4 right-6 w-8 h-8 rounded-full bg-[#E5E7EB] flex items-center justify-center select-none shadow-sm z-10">
+                            <span className="text-[#1F1F1F] text-xs font-black tracking-tight">{seat}</span>
                         </div>
 
                         {/* FIFA Badge */}
-                        <div className="bg-[#1F1F1F] rounded-2xl px-6 py-4 mb-2 text-center select-none w-[130px] shadow-sm">
-                            <p className="text-white text-[11px] font-black tracking-widest leading-none">FIFA</p>
-                            <p className="text-white text-[9px] font-black tracking-widest mt-1.5 leading-none">WORLD CUP</p>
-                            <p className="text-white text-[11px] font-black tracking-widest mt-1.5 leading-none">2026™</p>
+                        <div className="bg-[#1F1F1F] rounded-[24px] px-8 py-5 text-center select-none w-[140px] shadow-sm flex flex-col items-center justify-center">
+                            <p className="text-white text-[14px] font-black tracking-[0.12em] leading-none uppercase">FIFA</p>
+                            <p className="text-white text-[9px] font-black tracking-[0.1em] mt-1.5 leading-none uppercase">WORLD CUP</p>
+                            <p className="text-white text-[14px] font-black tracking-[0.12em] mt-1.5 leading-none uppercase">2026</p>
                         </div>
                     </div>
                 </div>
