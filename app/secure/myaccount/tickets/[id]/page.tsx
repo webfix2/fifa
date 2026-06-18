@@ -120,33 +120,46 @@ export default function TicketDetailsAccountPage() {
             </header>
 
             <div className="flex-1 overflow-y-auto px-4 pt-16 pb-6 space-y-6">
-                {/* Blue Info Banner */}
-                <div className="bg-[#002B7F] rounded-2xl px-4 py-3 flex items-start space-x-3">
-                    <div className="w-6 h-6 rounded-full border-2 border-white flex items-center justify-center shrink-0 mt-0.5">
-                        <span className="text-white text-[10px] font-black">i</span>
-                    </div>
-                    <div>
-                        <p className="text-white text-xs font-black uppercase tracking-wide">THE TICKET IS NOT YET READY</p>
-                        <p className="text-white/70 text-[11px] font-medium mt-0.5">It will be activated on the day of the match</p>
-                    </div>
-                </div>
-
-                {/* QR Code Card */}
-                <div className="bg-[#faf5f7] rounded-2xl shadow-sm overflow-hidden relative">
-                    {/* Seat Number - top right */}
-                    <div className="absolute top-4 right-5">
-                        <p className="text-[#1F1F1F]/40 text-2xl font-black">{seat}</p>
-                    </div>
-                    <div className="flex flex-col items-center py-6 px-6">
-                        {/* FIFA Badge */}
-                        <div className="bg-[#1F1F1F] rounded-2xl px-5 py-3 mb-4">
-                            <p className="text-white text-[11px] font-black tracking-wider">FIFA</p>
-                            <p className="text-white text-[9px] font-black tracking-wider">WORLD CUP</p>
-                            <p className="text-white text-[11px] font-black tracking-wider">2026</p>
+                {/* Combined Ticket Status & QR Card */}
+                <div className="bg-[#faf5f7] rounded-3xl shadow-sm overflow-hidden border border-gray-100">
+                    {/* Watermarked Info Banner */}
+                    <div className="relative bg-white border-l-[8px] border-r-[8px] border-[#026CDF] px-4 py-4 flex flex-col items-center justify-center min-h-[90px] overflow-hidden border-b border-gray-100">
+                        {/* Faded QR code watermark in background */}
+                        <div className="absolute inset-0 flex items-center justify-center opacity-[0.08] pointer-events-none select-none">
+                            <img
+                                src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=WATERMARK`}
+                                alt="Watermark QR"
+                                className="w-40 h-40 object-contain"
+                            />
                         </div>
+                        {/* Info Icon in top-right */}
+                        <div className="absolute top-3.5 right-3.5 text-[#026CDF] text-[10px] font-black w-4 h-4 border-[1.5px] border-[#026CDF] rounded-full flex items-center justify-center select-none">
+                            i
+                        </div>
+                        {/* Text Content */}
+                        <div className="text-center relative z-10 px-6">
+                            <p className="text-[#002B7F] text-xs font-black uppercase tracking-wider">THE TICKET IS NOT YET READY</p>
+                            <p className="text-gray-500 text-[10px] font-bold mt-1">It will be activated on the day of the match</p>
+                        </div>
+                    </div>
+
+                    {/* QR Code and Badge Body */}
+                    <div className="relative flex flex-col items-center py-8 px-6">
+                        {/* Seat Number / Index - top right */}
+                        <div className="absolute top-4 right-6 select-none">
+                            <p className="text-[#1F1F1F]/30 text-3xl font-black tracking-tighter">{seat}</p>
+                        </div>
+
+                        {/* FIFA Badge */}
+                        <div className="bg-[#1F1F1F] rounded-2xl px-6 py-4 mb-6 text-center select-none w-[130px] shadow-sm">
+                            <p className="text-white text-[11px] font-black tracking-widest leading-none">FIFA</p>
+                            <p className="text-white text-[9px] font-black tracking-widest mt-1.5 leading-none">WORLD CUP</p>
+                            <p className="text-white text-[11px] font-black tracking-widest mt-1.5 leading-none">2026™</p>
+                        </div>
+
                         {/* QR Code */}
-                        <div className="bg-white rounded-xl p-2 overflow-hidden">
-                            <div className="overflow-hidden w-24 h-24">
+                        <div className="bg-white rounded-2xl p-3 shadow-inner border border-gray-100 overflow-hidden">
+                            <div className="overflow-hidden w-28 h-28">
                                 <div
                                     className="flex transition-transform duration-300"
                                     style={{ transform: `translateX(-${currentSeatIndex * 100}%)` }}
@@ -156,7 +169,7 @@ export default function TicketDetailsAccountPage() {
                                             <img
                                                 src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(`${ticket.ticketId}-${s}`)}`}
                                                 alt={`QR Code for seat ${s}`}
-                                                className="w-24 h-24"
+                                                className="w-28 h-28 select-none"
                                             />
                                         </div>
                                     ))}
