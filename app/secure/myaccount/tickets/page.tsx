@@ -94,7 +94,7 @@ export default function MyTicketsPage() {
     return (
         <div className="flex-1 flex flex-col min-h-full pb-[100px]">
             <div className="px-6 pt-6 pb-2">
-                <h1 className="text-3xl font-black text-[#1F1F1F] tracking-tight">My tickets</h1>
+                <h1 className="text-3xl font-black text-[#1F1F1F] tracking-tight">My ticket(s)</h1>
             </div>
 
             <div className="flex px-6 pt-4 pb-0 border-b border-gray-100">
@@ -102,7 +102,7 @@ export default function MyTicketsPage() {
                     onClick={() => setActiveTab('upcoming')}
                     className={`flex items-center space-x-2 pb-3 font-bold text-sm transition-all border-b-2 whitespace-nowrap ${activeTab === 'upcoming' ? 'border-[#002B7F] text-[#1F1F1F]' : 'border-transparent text-gray-400'}`}
                 >
-                    <span>Upcoming events</span>
+                    <span>Upcoming match(es)</span>
                     <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-black ${activeTab === 'upcoming' ? 'bg-[#1F1F1F] text-white' : 'bg-gray-200 text-gray-500'}`}>
                         {activeTab === 'upcoming' ? filteredTickets.length : upcomingCount}
                     </span>
@@ -111,11 +111,24 @@ export default function MyTicketsPage() {
                     onClick={() => setActiveTab('past')}
                     className={`flex items-center space-x-2 pb-3 ml-6 font-bold text-sm transition-all border-b-2 whitespace-nowrap ${activeTab === 'past' ? 'border-[#002B7F] text-[#1F1F1F]' : 'border-transparent text-gray-400'}`}
                 >
-                    <span>Past events</span>
+                    <span>Past match(es)</span>
                 </button>
             </div>
 
             <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
+                {/* FIFA World Cup 2026 App Banner */}
+                <div className="bg-white rounded-xl shadow-sm border border-gray-100 px-4 py-3 flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-[#002B7F] rounded-lg flex items-center justify-center shrink-0">
+                        <svg viewBox="0 0 24 24" className="w-6 h-6 text-white" fill="currentColor">
+                            <path d="M12 2L9 7H3l5 4-2 7 6-4 6 4-2-7 5-4h-6L12 2z"/>
+                        </svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                        <p className="font-bold text-[#1F1F1F] text-sm">FIFA World Cup 2026™ App</p>
+                        <p className="text-xs text-gray-400">Your tournament companion to every match and city</p>
+                    </div>
+                </div>
+
                 {filteredTickets.length > 0 ? (
                     filteredTickets.map((ticket, i) => {
                         const { day, month, year, time } = parseDateTime(ticket.dateTime);

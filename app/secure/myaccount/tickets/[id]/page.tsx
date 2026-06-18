@@ -5,7 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { useUser } from '../../../../UserContext';
 import { Ticket } from '../../../../types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faCalendarAlt, faMapMarkerAlt, faUniversalAccess, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faCalendarAlt, faMapMarkerAlt, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import TransferModal from '../../../../components/TransferModal';
 
@@ -119,17 +119,31 @@ export default function TicketDetailsAccountPage() {
                 </div>
             </header>
 
-            <div className="flex-1 overflow-y-auto px-4 pt-16 pb-6 space-y-6">
+            <div className="flex-1 overflow-y-auto px-4 pt-16 pb-6 space-y-4">
+                {/* Blue Info Banner */}
+                <div className="bg-[#002B7F] rounded-2xl px-4 py-3 flex items-start space-x-3">
+                    <div className="w-6 h-6 rounded-full border-2 border-white flex items-center justify-center shrink-0 mt-0.5">
+                        <span className="text-white text-[10px] font-black">i</span>
+                    </div>
+                    <div>
+                        <p className="text-white text-xs font-black uppercase tracking-wide">THE TICKET IS NOT YET READY</p>
+                        <p className="text-white/70 text-[11px] font-medium mt-0.5">It will be activated on the day of the match</p>
+                    </div>
+                </div>
+
                 {/* QR Code Card */}
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                    <div className="flex">
-                        <div className="w-1 bg-[#20D4C8] rounded-l-2xl" />
-                        <div className="flex-1 flex flex-col items-center py-3 px-4">
-                            <div className="mb-1 self-start">
-                                <FontAwesomeIcon icon={faUniversalAccess} className="text-gray-400 text-lg" />
+                <div className="bg-gradient-to-br from-[#002B7F] via-[#1a4a8a] to-[#e84393] rounded-2xl shadow-sm overflow-hidden relative">
+                    <div className="flex items-center justify-between px-6 py-6">
+                        <div className="flex flex-col items-center">
+                            {/* FIFA Badge */}
+                            <div className="bg-[#1F1F1F] rounded-2xl px-4 py-3 mb-3">
+                                <p className="text-white text-[10px] font-black tracking-wider">FIFA</p>
+                                <p className="text-white text-[8px] font-black tracking-wider">WORLD CUP</p>
+                                <p className="text-white text-[10px] font-black tracking-wider">2026</p>
                             </div>
-                            <div className="flex items-center justify-center">
-                                <div className="overflow-hidden w-28 h-28">
+                            {/* QR Code */}
+                            <div className="bg-white rounded-xl p-2 overflow-hidden">
+                                <div className="overflow-hidden w-24 h-24">
                                     <div
                                         className="flex transition-transform duration-300"
                                         style={{ transform: `translateX(-${currentSeatIndex * 100}%)` }}
@@ -139,7 +153,7 @@ export default function TicketDetailsAccountPage() {
                                                 <img
                                                     src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(`${ticket.ticketId}-${s}`)}`}
                                                     alt={`QR Code for seat ${s}`}
-                                                    className="w-28 h-28 rounded-lg"
+                                                    className="w-24 h-24"
                                                 />
                                             </div>
                                         ))}
@@ -147,15 +161,11 @@ export default function TicketDetailsAccountPage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="w-1 bg-[#20D4C8] rounded-r-2xl" />
+                        {/* Seat Number */}
+                        <div className="text-right">
+                            <p className="text-white/60 text-5xl font-black">{seat}</p>
+                        </div>
                     </div>
-                </div>
-
-                {/* FIFA Branding */}
-                <div className="text-center">
-                    <p className="text-lg font-black text-[#1F1F1F] tracking-tight leading-none">FIFA</p>
-                    <p className="text-sm font-black text-[#1F1F1F] tracking-tight">WORLD CUP</p>
-                    <p className="text-lg font-black text-[#1F1F1F] tracking-tight">2026</p>
                 </div>
 
                 {/* Match Info */}
@@ -178,20 +188,16 @@ export default function TicketDetailsAccountPage() {
                         <p className="text-lg font-black text-[#1F1F1F]">{ticket.entrance || '--'}</p>
                     </div>
                     <div className="border border-gray-200 rounded-xl p-3 text-center">
-                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">HOSPITALITY AREA</p>
-                        <p className="text-sm font-black text-[#1F1F1F]">{ticket.hospitalityArea || '--'}</p>
-                    </div>
-                    <div className="border border-gray-200 rounded-xl p-3 text-center">
                         <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">GATE</p>
                         <p className="text-lg font-black text-[#1F1F1F]">{ticket.gate || '--'}</p>
                     </div>
+                    <div className="border border-gray-200 rounded-xl p-3 text-center">
+                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">SECTION</p>
+                        <p className="text-lg font-black text-[#1F1F1F]">{ticket.sectionNo || '--'}</p>
+                    </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-3">
-                    <div className="border border-gray-200 rounded-xl p-3 text-center">
-                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">SUITE</p>
-                        <p className="text-sm font-black text-[#1F1F1F]">{ticket.sectionNo || '--'}</p>
-                    </div>
+                <div className="grid grid-cols-2 gap-3 max-w-[60%] mx-auto">
                     <div className="border border-gray-200 rounded-xl p-3 text-center">
                         <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">ROW</p>
                         <p className="text-lg font-black text-[#1F1F1F]">{ticket.row || '--'}</p>
@@ -205,9 +211,15 @@ export default function TicketDetailsAccountPage() {
                 {/* Dotted Divider */}
                 <div className="border-t border-dotted border-gray-300" />
 
+                {/* Ticket Holder */}
+                <div className="flex items-center justify-between px-2">
+                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">TICKET HOLDER</span>
+                    <span className="text-sm font-bold text-[#1F1F1F]">* FIFA Collect by Modex *</span>
+                </div>
+
                 {/* Ticket Category */}
                 <div className="flex items-center justify-between px-2">
-                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">TICKET CATEGORY</span>
+                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">CATEGORY</span>
                     <span className="text-sm font-bold text-[#1F1F1F]">{ticket.section || 'Standard'}</span>
                 </div>
             </div>
