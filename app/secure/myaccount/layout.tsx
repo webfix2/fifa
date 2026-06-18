@@ -99,9 +99,6 @@ export default function MyAccountLayout({
                         <h1 className="text-base font-bold text-[#1F1F1F]">
                             {isTicketsList ? '' : isTransfers ? 'Transfers' : 'My Account'}
                         </h1>
-                        {isTicketsList && flagUrl && (
-                            <img src={flagUrl} alt={country} className="w-5 h-3.5 rounded-sm object-cover" />
-                        )}
                     </div>
 
                     <div className="w-12 flex justify-end">
