@@ -119,7 +119,7 @@ export default function TicketDetailsAccountPage() {
                 </div>
             </header>
 
-            <div className="flex-1 overflow-y-auto px-4 pt-16 pb-6 space-y-4">
+            <div className="flex-1 overflow-y-auto px-4 pt-16 pb-6 space-y-6">
                 {/* Blue Info Banner */}
                 <div className="bg-[#002B7F] rounded-2xl px-4 py-3 flex items-start space-x-3">
                     <div className="w-6 h-6 rounded-full border-2 border-white flex items-center justify-center shrink-0 mt-0.5">
@@ -135,53 +135,72 @@ export default function TicketDetailsAccountPage() {
                 <div className="bg-[#faf5f7] rounded-2xl shadow-sm overflow-hidden relative">
                     {/* Seat Number - top right */}
                     <div className="absolute top-4 right-5">
-                        <p className="text-[#1F1F1F]/30 text-xl font-black">{seat}</p>
+                        <p className="text-[#1F1F1F]/40 text-2xl font-black">{seat}</p>
                     </div>
                     <div className="flex flex-col items-center py-6 px-6">
                         {/* FIFA Badge */}
-                        <div className="bg-[#1F1F1F] rounded-2xl px-5 py-3">
+                        <div className="bg-[#1F1F1F] rounded-2xl px-5 py-3 mb-4">
                             <p className="text-white text-[11px] font-black tracking-wider">FIFA</p>
                             <p className="text-white text-[9px] font-black tracking-wider">WORLD CUP</p>
                             <p className="text-white text-[11px] font-black tracking-wider">2026</p>
+                        </div>
+                        {/* QR Code */}
+                        <div className="bg-white rounded-xl p-2 overflow-hidden">
+                            <div className="overflow-hidden w-24 h-24">
+                                <div
+                                    className="flex transition-transform duration-300"
+                                    style={{ transform: `translateX(-${currentSeatIndex * 100}%)` }}
+                                >
+                                    {seats.map((s, i) => (
+                                        <div key={i} className="min-w-full flex items-center justify-center">
+                                            <img
+                                                src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(`${ticket.ticketId}-${s}`)}`}
+                                                alt={`QR Code for seat ${s}`}
+                                                className="w-24 h-24"
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 {/* Match Info */}
                 <div className="text-center space-y-2">
-                    <h2 className="text-xl font-black text-[#1F1F1F]">{ticket.eventName || 'Match'}</h2>
-                    <div className="flex items-center justify-center space-x-2 text-sm text-gray-500">
-                        <FontAwesomeIcon icon={faCalendarAlt} className="text-gray-400" />
+                    <h2 className="text-2xl font-black text-[#1F1F1F]">{ticket.eventName || 'Match'}</h2>
+                    <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
+                        <FontAwesomeIcon icon={faCalendarAlt} className="text-gray-500" />
                         <span>{formatDate(ticket.dateTime)}</span>
                     </div>
-                    <div className="flex items-center justify-center space-x-2 text-sm text-gray-500">
-                        <FontAwesomeIcon icon={faMapMarkerAlt} className="text-gray-400" />
+                    <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
+                        <FontAwesomeIcon icon={faMapMarkerAlt} className="text-gray-500" />
                         <span>{ticket.venue}{ticket.location ? `, ${ticket.location}` : ''}</span>
                     </div>
                 </div>
 
                 {/* Entry Details Grid */}
                 <div className="grid grid-cols-3 gap-3">
-                    <div className="border border-gray-200 rounded-xl p-3 text-center">
+                    <div className="border border-gray-300 rounded-xl p-3 text-center">
                         <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">ENTRANCE</p>
                         <p className="text-lg font-black text-[#1F1F1F]">{ticket.entrance || '--'}</p>
                     </div>
-                    <div className="border border-gray-200 rounded-xl p-3 text-center">
+                    <div className="border border-gray-300 rounded-xl p-3 text-center">
                         <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">GATE</p>
                         <p className="text-lg font-black text-[#1F1F1F]">{ticket.gate || '--'}</p>
                     </div>
-                    <div className="border border-gray-200 rounded-xl p-3 text-center">
+                    <div className="border border-gray-300 rounded-xl p-3 text-center">
                         <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">SECTION</p>
                         <p className="text-lg font-black text-[#1F1F1F]">{ticket.sectionNo || '--'}</p>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 max-w-[60%] mx-auto">
-                    <div className="border border-gray-200 rounded-xl p-3 text-center">
+                <div className="grid grid-cols-2 gap-3 max-w-[65%] mx-auto">
+                    <div className="border border-gray-300 rounded-xl p-3 text-center">
                         <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">ROW</p>
                         <p className="text-lg font-black text-[#1F1F1F]">{ticket.row || '--'}</p>
                     </div>
-                    <div className="border border-gray-200 rounded-xl p-3 text-center">
+                    <div className="border border-gray-300 rounded-xl p-3 text-center">
                         <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">SEAT</p>
                         <p className="text-lg font-black text-[#1F1F1F]">{seat}</p>
                     </div>
