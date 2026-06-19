@@ -155,10 +155,12 @@ export default function TicketDetailsAccountPage() {
                         </div>
 
                         {/* FIFA Badge */}
-                        <div className="bg-[#1F1F1F] rounded-[24px] px-8 py-5 text-center select-none w-[140px] shadow-sm flex flex-col items-center justify-center">
-                            <p className="text-white text-[14px] font-black tracking-[0.12em] leading-none uppercase">FIFA</p>
-                            <p className="text-white text-[9px] font-black tracking-[0.1em] mt-1.5 leading-none uppercase">WORLD CUP</p>
-                            <p className="text-white text-[14px] font-black tracking-[0.12em] mt-1.5 leading-none uppercase">2026</p>
+                        <div className="flex items-center justify-center w-[140px]">
+                            <img
+                                src="https://robertlugana.sirv.com/FIFA/WhatsApp%20Image%202026-06-19%20at%2007.28.01.jpeg"
+                                alt="FIFA World Cup 2026"
+                                className="w-full h-auto rounded-[24px] shadow-sm"
+                            />
                         </div>
                     </div>
                 </div>
