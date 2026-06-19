@@ -5,10 +5,9 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useUser } from '../../UserContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
-    faSearch, 
     faTicketAlt, 
-    faHeart, 
-    faUserCircle,
+    faExchangeAlt,
+    faBars,
     faChevronLeft,
     faUser
 } from '@fortawesome/free-solid-svg-icons';
@@ -97,19 +96,17 @@ export default function MyAccountLayout({
                     
                     <div className="flex items-center space-x-2">
                         <h1 className="text-base font-bold text-[#1F1F1F]">
-                            {isTicketsList ? '' : isTransfers ? 'Transfers' : 'My Account'}
+                            {isTicketsList ? 'My ticket(s)' : isTransfers ? 'Transfers' : 'My Account'}
                         </h1>
                     </div>
 
                     <div className="w-12 flex justify-end">
-                        {(isTicketsList || isTransfers) ? (
-                            <button className="text-sm font-bold text-gray-500">Help</button>
-                        ) : isManage ? (
-                            <div className="w-10"></div>
-                        ) : (
+                        {!isManage && pathParts.length > 3 && !isTicketsList && !isTransfers ? (
                             <button onClick={() => router.push('/secure/myaccount/manage')} className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-gray-600">
                                 <FontAwesomeIcon icon={faUser} className="text-sm" />
                             </button>
+                        ) : (
+                            <div className="w-12" />
                         )}
                     </div>
                 </header>
@@ -122,21 +119,17 @@ export default function MyAccountLayout({
             {/* Global Bottom Nav */}
             {!isDetailView && (
             <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-6 pt-3 pb-6 flex justify-between items-center z-[100] shadow-[0_-8px_30px_rgb(0,0,0,0.04)]">
-                <button onClick={() => router.push('/')} className={`flex flex-col items-center space-y-1 ${pathname === '/' ? 'text-[#002B7F]' : 'text-gray-400'}`}>
-                    <FontAwesomeIcon icon={faSearch} className="text-xl" />
-                    <span className="text-[10px] font-bold">Discover</span>
-                </button>
-                <button onClick={() => router.push('/secure/myaccount/transfers')} className={`flex flex-col items-center space-y-1 ${pathname.includes('/transfers') ? 'text-[#002B7F]' : 'text-gray-400'}`}>
-                    <FontAwesomeIcon icon={faHeart} className="text-xl" />
-                    <span className="text-[10px] font-bold">Favorites</span>
-                </button>
                 <button onClick={() => router.push('/secure/myaccount/tickets')} className={`flex flex-col items-center space-y-1 ${pathname.includes('/tickets') ? 'text-[#002B7F]' : 'text-gray-400'}`}>
                     <FontAwesomeIcon icon={faTicketAlt} className="text-xl" />
-                    <span className="text-[10px] font-bold">My Tickets</span>
+                    <span className="text-[10px] font-bold">My tickets</span>
+                </button>
+                <button onClick={() => router.push('/secure/myaccount/transfers')} className={`flex flex-col items-center space-y-1 ${pathname.includes('/transfers') ? 'text-[#002B7F]' : 'text-gray-400'}`}>
+                    <FontAwesomeIcon icon={faExchangeAlt} className="text-xl" />
+                    <span className="text-[10px] font-bold">Transactions</span>
                 </button>
                 <button onClick={() => router.push('/secure/myaccount/manage')} className={`flex flex-col items-center space-y-1 ${pathname.includes('/manage') || pathname.includes('/personal-details') ? 'text-[#002B7F]' : 'text-gray-400'}`}>
-                    <FontAwesomeIcon icon={faUserCircle} className="text-xl" />
-                    <span className="text-[10px] font-bold">My Account</span>
+                    <FontAwesomeIcon icon={faBars} className="text-xl" />
+                    <span className="text-[10px] font-bold">More</span>
                 </button>
             </nav>
             )}
