@@ -21,6 +21,9 @@ export interface User {
   section: string;
   sectionNo: string;
   row: string;
+  gate?: string;
+  entrance?: string;
+  hospitalityArea?: string;
   ageRestriction: string;
   description: string;
   terms: string;

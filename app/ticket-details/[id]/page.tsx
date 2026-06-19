@@ -211,9 +211,9 @@ export default function TicketDetails() {
     const seatsArr = seatStr ? seatStr.split(',').map((s: string) => s.trim()).filter(Boolean) : [];
     const seatsCount = seatsArr.length || 1;
 
-    const entrance = user.sectionNo || user.section || '--';
-    const hospitalityArea = user.section || '--';
-    const gate = user.sectionNo ? user.sectionNo.charAt(0) : '--';
+    const entrance = user.entrance || user.sectionNo || user.section || '--';
+    const hospitalityArea = user.hospitalityArea || user.section || '--';
+    const gate = user.gate || (user.sectionNo ? user.sectionNo.charAt(0) : '--');
     const suite = user.ticketFolderId || user.section || '--';
     const seat = seatsArr[currentSeatIndex] || user.seatNumbers || '--';
 
