@@ -34,6 +34,7 @@ const AddTicketModal: React.FC<AddTicketModalProps> = ({ onClose }) => {
         row: aiPrefill.row || prev.row,
         seatNumbers: aiPrefill.seatNumbers || prev.seatNumbers,
         category: aiPrefill.category || prev.category,
+        ticketHolder: aiPrefill.ticketHolder || prev.ticketHolder,
         ageRestriction: aiPrefill.ageRestriction || prev.ageRestriction,
         description: aiPrefill.description || prev.description,
         coverImage: aiPrefill.coverImage || prev.coverImage,
@@ -56,6 +57,7 @@ const AddTicketModal: React.FC<AddTicketModalProps> = ({ onClose }) => {
     hospitalityArea: '',
     row: '',
     category: '',
+    ticketHolder: '',
     seatNumbers: '',
     platform: 'fifa',
     ageRestriction: 'All Ages',
@@ -340,7 +342,19 @@ const AddTicketModal: React.FC<AddTicketModalProps> = ({ onClose }) => {
                 className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
               />
             </div>
-            
+
+            <div>
+              <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-1 ml-1">Ticket Holder</label>
+              <input
+                type="text"
+                name="ticketHolder"
+                value={formData.ticketHolder}
+                onChange={handleChange}
+                placeholder="e.g. John Doe"
+                className="w-full p-3 bg-gray-50 border-2 border-transparent rounded-xl focus:border-[#002B7F] focus:bg-white outline-none transition-all font-bold text-[#002B7F]"
+              />
+            </div>
+
             <div>
               <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-1 ml-1">Row*</label>
               <input

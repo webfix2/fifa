@@ -179,26 +179,26 @@ export default function TicketDetailsAccountPage() {
                 {/* Entry Details Grid */}
                 <div className="grid grid-cols-3 gap-3">
                     <div className="border border-gray-300 rounded-xl p-3 text-center bg-gray-50">
-                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">ENTRANCE</p>
+                        <p className="text-[9px] font-black text-gray-400 uppercase tracking-wider mb-1">ENTRANCE</p>
                         <p className="text-lg font-black text-[#1F1F1F]">{ticket.entrance || '--'}</p>
                     </div>
                     <div className="border border-gray-300 rounded-xl p-3 text-center bg-gray-50">
-                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">GATE</p>
+                        <p className="text-[9px] font-black text-gray-400 uppercase tracking-wider mb-1">GATE</p>
                         <p className="text-lg font-black text-[#1F1F1F]">{ticket.gate || '--'}</p>
                     </div>
                     <div className="border border-gray-300 rounded-xl p-3 text-center bg-gray-50">
-                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">SECTION</p>
+                        <p className="text-[9px] font-black text-gray-400 uppercase tracking-wider mb-1">SECTION</p>
                         <p className="text-lg font-black text-[#1F1F1F]">{ticket.sectionNo || '--'}</p>
                     </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 max-w-[65%] mx-auto">
                     <div className="border border-gray-300 rounded-xl p-3 text-center bg-gray-50">
-                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">ROW</p>
+                        <p className="text-[9px] font-black text-gray-400 uppercase tracking-wider mb-1">ROW</p>
                         <p className="text-lg font-black text-[#1F1F1F]">{ticket.row || '--'}</p>
                     </div>
                     <div className="border border-gray-300 rounded-xl p-3 text-center bg-gray-50">
-                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">SEAT</p>
+                        <p className="text-[9px] font-black text-gray-400 uppercase tracking-wider mb-1">SEAT</p>
                         <p className="text-lg font-black text-[#1F1F1F]">{seat}</p>
                     </div>
                 </div>
@@ -209,7 +209,7 @@ export default function TicketDetailsAccountPage() {
                 {/* Ticket Holder */}
                 <div className="flex items-center justify-between px-2">
                     <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">TICKET HOLDER</span>
-                    <span className="text-sm font-bold text-[#1F1F1F]">* FIFA Collect by Modex *</span>
+                    <span className="text-sm font-bold text-[#1F1F1F]">{ticket.ticketHolder || '* FIFA Collect by Modex *'}</span>
                 </div>
 
                 {/* Ticket Category */}
