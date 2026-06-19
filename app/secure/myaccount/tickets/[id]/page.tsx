@@ -16,8 +16,8 @@ function formatDate(dt: string): string {
         if (isNaN(d.getTime())) return dt;
         const day = d.getDate();
         const month = d.toLocaleString('en-US', { month: 'short' }).toUpperCase();
-        const year = d.getFullYear();
-        const time = d.toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+        const year = String(d.getFullYear()).slice(-2);
+        const time = d.toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
         return `${day} ${month} ${year}, ${time}`;
     } catch {
         return dt;
