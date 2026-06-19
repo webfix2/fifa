@@ -118,10 +118,12 @@ export default function MyTicketsPage() {
             <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
                 {/* FIFA World Cup 2026 App Banner */}
                 <div className="bg-white rounded-xl shadow-sm border border-gray-100 px-4 py-3 flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-[#002B7F] rounded-lg flex items-center justify-center shrink-0">
-                        <svg viewBox="0 0 24 24" className="w-6 h-6 text-white" fill="currentColor">
-                            <path d="M12 2L9 7H3l5 4-2 7 6-4 6 4-2-7 5-4h-6L12 2z"/>
-                        </svg>
+                    <div className="w-10 h-10 flex items-center justify-center shrink-0">
+                        <img
+                            src="https://upload.wikimedia.org/wikipedia/en/thumb/1/17/2026_FIFA_World_Cup_emblem.svg/250px-2026_FIFA_World_Cup_emblem.svg.png"
+                            alt="FIFA World Cup 2026"
+                            className="w-10 h-10 object-contain"
+                        />
                     </div>
                     <div className="flex-1 min-w-0">
                         <p className="font-bold text-[#1F1F1F] text-sm">FIFA World Cup 2026™ App</p>
