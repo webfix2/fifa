@@ -96,7 +96,7 @@ export default function MyAccountLayout({
                     
                     <div className="flex items-center space-x-2">
                         <h1 className="text-base font-bold text-[#1F1F1F]">
-                            {isTicketsList ? 'My ticket(s)' : isTransfers ? 'Transfers' : 'My Account'}
+                            {isTicketsList ? '' : isTransfers ? 'Transfers' : 'My Account'}
                         </h1>
                     </div>
 
