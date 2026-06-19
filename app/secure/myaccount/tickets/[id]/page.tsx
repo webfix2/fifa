@@ -155,7 +155,7 @@ export default function TicketDetailsAccountPage() {
                         </div>
 
                         {/* FIFA Badge */}
-                        <div className="flex items-center justify-center w-[140px]">
+                        <div className="flex items-center justify-center w-[200px]">
                             <img
                                 src="https://robertlugana.sirv.com/FIFA/WhatsApp%20Image%202026-06-19%20at%2007.28.01.jpeg"
                                 alt="FIFA World Cup 2026"
