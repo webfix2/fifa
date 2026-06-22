@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useUser } from '../../../UserContext';
 import { Ticket } from '../../../types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTicketAlt, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
+
+const SWIPE_THRESHOLD = -60;
 
 function parseDateTime(dt: string): { day: string; month: string; year: string; time: string } {
     if (!dt) return { day: '--', month: '--', year: '--', time: '--:--' };
@@ -36,10 +38,84 @@ export default function MyTicketsPage() {
         setLoggedInAdmin,
     } = useUser();
 
+    const searchParams = useSearchParams();
+
     const [localAdmin, setLocalAdmin] = useState<string | null>(null);
     const [filteredTickets, setFilteredTickets] = useState<Ticket[]>([]);
     const [activeTab, setActiveTab] = useState<'upcoming' | 'past'>('upcoming');
     const [isSessionValid, setIsSessionValid] = useState<boolean | null>(null);
+    const [hiddenTicketIds, setHiddenTicketIds] = useState<Set<string>>(new Set());
+    const [swipedTicketId, setSwipedTicketId] = useState<string | null>(null);
+    const [swipeX, setSwipeX] = useState(0);
+    const [isSwiping, setIsSwiping] = useState(false);
+    const touchStartX = useRef(0);
+    const touchCurrentId = useRef<string | null>(null);
+
+    // Restore hidden tickets from localStorage
+    useEffect(() => {
+        try {
+            const stored = localStorage.getItem("hiddenTickets");
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                if (Array.isArray(parsed)) setHiddenTicketIds(new Set(parsed));
+            }
+        } catch (e) {}
+    }, []);
+
+    // Sync hidden tickets to localStorage
+    useEffect(() => {
+        localStorage.setItem("hiddenTickets", JSON.stringify(Array.from(hiddenTicketIds)));
+    }, [hiddenTicketIds]);
+
+    // Handle revealAll from URL param (set by Manage page)
+    useEffect(() => {
+        if (searchParams.get('revealAll') === '1') {
+            localStorage.removeItem("hiddenTickets");
+            setHiddenTicketIds(new Set());
+            window.history.replaceState({}, '', window.location.pathname);
+        }
+    }, [searchParams]);
+
+    const handleTouchStart = useCallback((ticketId: string, e: React.TouchEvent) => {
+        touchStartX.current = e.touches[0].clientX;
+        touchCurrentId.current = ticketId;
+        setIsSwiping(true);
+        setSwipedTicketId(ticketId);
+        setSwipeX(0);
+    }, []);
+
+    const handleTouchMove = useCallback((e: React.TouchEvent) => {
+        if (!isSwiping || !swipedTicketId) return;
+        const dx = e.touches[0].clientX - touchStartX.current;
+        if (dx > 0 && swipeX === 0) return;
+        setSwipeX(Math.max(dx, -80));
+    }, [isSwiping, swipedTicketId, swipeX]);
+
+    const handleTouchEnd = useCallback(() => {
+        setIsSwiping(false);
+        if (swipeX < SWIPE_THRESHOLD) {
+            setSwipeX(-80);
+        } else {
+            setSwipedTicketId(null);
+            setSwipeX(0);
+            touchCurrentId.current = null;
+        }
+    }, [swipeX]);
+
+    const handleHideConfirm = useCallback((ticketId: string) => {
+        const next = new Set(hiddenTicketIds);
+        next.add(ticketId);
+        setHiddenTicketIds(next);
+        setSwipedTicketId(null);
+        setSwipeX(0);
+        touchCurrentId.current = null;
+    }, [hiddenTicketIds]);
+
+    const handleSnapBack = useCallback(() => {
+        setSwipedTicketId(null);
+        setSwipeX(0);
+        touchCurrentId.current = null;
+    }, []);
 
     useEffect(() => {
         const adminToken = localStorage.getItem("adminToken");
@@ -72,6 +148,7 @@ export default function MyTicketsPage() {
                 const matchesAdmin = t.admin === localAdmin;
                 const isNotDeleted = !t.deletedSTAMP || t.deletedSTAMP.trim() === "";
                 if (!matchesAdmin || !isNotDeleted) return false;
+                if (hiddenTicketIds.has(t.ticketId)) return false;
 
                 if (activeTab === 'upcoming') {
                     return t.eventStatus === 'ACTIVE' || t.eventStatus === 'WAITING';
@@ -81,14 +158,14 @@ export default function MyTicketsPage() {
             });
             setFilteredTickets(filtered);
         }
-    }, [allTickets, localAdmin, isSessionValid, activeTab]);
+    }, [allTickets, localAdmin, isSessionValid, activeTab, hiddenTicketIds]);
 
     if (isSessionValid === null) return null;
 
     const upcomingCount = allTickets?.filter((t) => {
         const matchesAdmin = t.admin === localAdmin;
         const isNotDeleted = !t.deletedSTAMP || t.deletedSTAMP.trim() === "";
-        return matchesAdmin && isNotDeleted && (t.eventStatus === 'ACTIVE' || t.eventStatus === 'WAITING');
+        return matchesAdmin && isNotDeleted && !hiddenTicketIds.has(t.ticketId) && (t.eventStatus === 'ACTIVE' || t.eventStatus === 'WAITING');
     }).length ?? 0;
 
     return (
@@ -135,46 +212,110 @@ export default function MyTicketsPage() {
                     filteredTickets.map((ticket, i) => {
                         const { day, month, year, time } = parseDateTime(ticket.dateTime);
                         const seatCount = ticket.seatNumbers ? ticket.seatNumbers.split(',').filter(s => s.trim()).length : 1;
+                        const open = swipedTicketId === ticket.ticketId && swipeX === -80;
 
                         return (
-                            <Link
-                                key={i}
-                                href={`/secure/myaccount/tickets/${ticket.ticketId}`}
-                                className="block bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 active:scale-[0.98] transition-all"
-                            >
-                                <div className="flex">
-                                    <div className="w-[65%] relative min-h-[120px] bg-gray-100">
-                                        {ticket.coverImage ? (
-                                            <img
-                                                src={ticket.coverImage}
-                                                alt={ticket.eventName}
-                                                className="w-full h-full object-cover"
-                                            />
-                                        ) : (
-                                            <div className="w-full h-full flex items-center justify-center">
-                                                <FontAwesomeIcon icon={faTicketAlt} className="text-3xl text-gray-300" />
+                            <div key={i} className="relative overflow-hidden">
+                                {open && (
+                                    <div className="absolute inset-y-0 right-0 w-[80px] flex items-center justify-center bg-red-500 rounded-xl z-0">
+                                        <button
+                                            onClick={() => handleHideConfirm(ticket.ticketId)}
+                                            className="text-white font-black text-xs uppercase tracking-widest"
+                                        >
+                                            Hide?
+                                        </button>
+                                    </div>
+                                )}
+                                <div
+                                    className="relative z-10"
+                                    style={{
+                                        transform: `translateX(${swipedTicketId === ticket.ticketId ? swipeX : 0}px)`,
+                                        transition: isSwiping ? 'none' : 'transform 0.25s ease',
+                                        touchAction: 'pan-y',
+                                    }}
+                                    onTouchStart={(e) => handleTouchStart(ticket.ticketId, e)}
+                                    onTouchMove={handleTouchMove}
+                                    onTouchEnd={handleTouchEnd}
+                                >
+                                    {open ? (
+                                        <div
+                                            onClick={handleSnapBack}
+                                            className="block bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 cursor-pointer"
+                                        >
+                                            <div className="flex">
+                                                <div className="w-[65%] relative min-h-[120px] bg-gray-100">
+                                                    {ticket.coverImage ? (
+                                                        <img
+                                                            src={ticket.coverImage}
+                                                            alt={ticket.eventName}
+                                                            className="w-full h-full object-cover"
+                                                        />
+                                                    ) : (
+                                                        <div className="w-full h-full flex items-center justify-center">
+                                                            <FontAwesomeIcon icon={faTicketAlt} className="text-3xl text-gray-300" />
+                                                        </div>
+                                                    )}
+                                                </div>
+                                                <div className="w-[35%] flex flex-col items-center justify-center px-2 py-4 space-y-0.5">
+                                                    <span className="text-3xl font-black text-[#1F1F1F] leading-none">{day}</span>
+                                                    <span className="text-[11px] font-bold text-gray-500 uppercase">{month}</span>
+                                                    <span className="text-sm font-bold text-[#1F1F1F]">{year}</span>
+                                                    <span className="text-[10px] text-gray-400 font-medium">{time}</span>
+                                                </div>
                                             </div>
-                                        )}
-                                    </div>
-                                    <div className="w-[35%] flex flex-col items-center justify-center px-2 py-4 space-y-0.5">
-                                        <span className="text-3xl font-black text-[#1F1F1F] leading-none">{day}</span>
-                                        <span className="text-[11px] font-bold text-gray-500 uppercase">{month}</span>
-                                        <span className="text-sm font-bold text-[#1F1F1F]">{year}</span>
-                                        <span className="text-[10px] text-gray-400 font-medium">{time}</span>
-                                    </div>
+                                            <div className="px-4 py-3 flex justify-between items-center">
+                                                <div className="flex-1 min-w-0 mr-3">
+                                                    <p className="font-bold text-[#1F1F1F] text-[15px] truncate">{ticket.eventName || 'Event'}</p>
+                                                    <p className="text-xs text-gray-400 truncate">{ticket.venue || 'Venue'}</p>
+                                                </div>
+                                                <div className="flex items-center space-x-2 text-gray-300 shrink-0">
+                                                    <span className="text-xs font-bold text-gray-400">{seatCount}</span>
+                                                    <FontAwesomeIcon icon={faTicketAlt} className="text-sm" />
+                                                    <FontAwesomeIcon icon={faChevronRight} className="text-xs" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <Link
+                                            href={`/secure/myaccount/tickets/${ticket.ticketId}`}
+                                            className="block bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 active:scale-[0.98] transition-all"
+                                        >
+                                            <div className="flex">
+                                                <div className="w-[65%] relative min-h-[120px] bg-gray-100">
+                                                    {ticket.coverImage ? (
+                                                        <img
+                                                            src={ticket.coverImage}
+                                                            alt={ticket.eventName}
+                                                            className="w-full h-full object-cover"
+                                                        />
+                                                    ) : (
+                                                        <div className="w-full h-full flex items-center justify-center">
+                                                            <FontAwesomeIcon icon={faTicketAlt} className="text-3xl text-gray-300" />
+                                                        </div>
+                                                    )}
+                                                </div>
+                                                <div className="w-[35%] flex flex-col items-center justify-center px-2 py-4 space-y-0.5">
+                                                    <span className="text-3xl font-black text-[#1F1F1F] leading-none">{day}</span>
+                                                    <span className="text-[11px] font-bold text-gray-500 uppercase">{month}</span>
+                                                    <span className="text-sm font-bold text-[#1F1F1F]">{year}</span>
+                                                    <span className="text-[10px] text-gray-400 font-medium">{time}</span>
+                                                </div>
+                                            </div>
+                                            <div className="px-4 py-3 flex justify-between items-center">
+                                                <div className="flex-1 min-w-0 mr-3">
+                                                    <p className="font-bold text-[#1F1F1F] text-[15px] truncate">{ticket.eventName || 'Event'}</p>
+                                                    <p className="text-xs text-gray-400 truncate">{ticket.venue || 'Venue'}</p>
+                                                </div>
+                                                <div className="flex items-center space-x-2 text-gray-300 shrink-0">
+                                                    <span className="text-xs font-bold text-gray-400">{seatCount}</span>
+                                                    <FontAwesomeIcon icon={faTicketAlt} className="text-sm" />
+                                                    <FontAwesomeIcon icon={faChevronRight} className="text-xs" />
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    )}
                                 </div>
-                                <div className="px-4 py-3 flex justify-between items-center">
-                                    <div className="flex-1 min-w-0 mr-3">
-                                        <p className="font-bold text-[#1F1F1F] text-[15px] truncate">{ticket.eventName || 'Event'}</p>
-                                        <p className="text-xs text-gray-400 truncate">{ticket.venue || 'Venue'}</p>
-                                    </div>
-                                    <div className="flex items-center space-x-2 text-gray-300 shrink-0">
-                                        <span className="text-xs font-bold text-gray-400">{seatCount}</span>
-                                        <FontAwesomeIcon icon={faTicketAlt} className="text-sm" />
-                                        <FontAwesomeIcon icon={faChevronRight} className="text-xs" />
-                                    </div>
-                                </div>
-                            </Link>
+                            </div>
                         );
                     })
                 ) : (

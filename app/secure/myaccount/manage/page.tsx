@@ -22,7 +22,8 @@ import {
     faUsers,
     faTicket,
     faPaperPlane,
-    faBuilding
+    faBuilding,
+    faEye
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function ManageDashboard() {
@@ -150,6 +151,8 @@ export default function ManageDashboard() {
                             <MenuItem icon={faExchangeAlt} label="Ticket(s) submitted for resale/exchange" />
                             <div className="border-t border-gray-50" />
                             <MenuItem icon={faTrash} label="Deleted" />
+                            <div className="border-t border-gray-50" />
+                            <MenuItem icon={faEye} label="Reveal All Hidden Tickets" action={() => router.push('/secure/myaccount/tickets?revealAll=1')} />
                         </div>
 
                         {/* Card 3: Info & Support */}
